@@ -57,12 +57,12 @@ module Rray
         end
 
         def fetch_scene(slice)
-          response = HTTP.get(URI.join(@url, 'scenes/', "#{slice['scene_id']}.json"))
+          response = HTTP.get(URI.join(@url, 'images/', "#{slice['image_id']}.json"))
           JSON.parse(response.to_s)
         end
 
         def create_tracer(slice)
-          @tracers[slice['scenes_id']] ||= begin
+          @tracers[slice['image_id']] ||= begin
             scene = fetch_scene(slice)
             Tracer.new(Scene.parse(scene['data']),
               width: scene['width'],
