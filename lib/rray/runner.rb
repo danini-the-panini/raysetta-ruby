@@ -46,12 +46,12 @@ module Rray
     end
   end
 
-  def self.connect_to_server(url, runner: :sync, concurrency: 4)
+  def self.connect_to_server(url, runner: :sync, concurrency: 4, poll: false)
     runner = case runner
-    when :sync then Rray::HttpRunner::Sync.new(url)
-    when :threads then Rray::HttpRunner::Threads.new(url, count: concurrency)
-    when :ractors then Rray::HttpRunner::Ractors.new(url, count: concurrency)
-    when :processes then Rray::HttpRunner::Processes.new(url, count: concurrency)
+    when :sync then Rray::HttpRunner::Sync.new(url, poll:)
+    when :threads then Rray::HttpRunner::Threads.new(url, count: concurrency, poll:)
+    when :ractors then Rray::HttpRunner::Ractors.new(url, count: concurrency, poll:)
+    when :processes then Rray::HttpRunner::Processes.new(url, count: concurrency, poll:)
     else
       warn "*** Unknown runner #{runner} ***"
       exit

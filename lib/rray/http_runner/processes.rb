@@ -5,8 +5,8 @@ module Rray
     class Processes < Base
       attr_reader :count
 
-      def initialize(url, count: 4)
-        super(url)
+      def initialize(url, count: 4, **options)
+        super(url, **options)
         @count = count
       end
 

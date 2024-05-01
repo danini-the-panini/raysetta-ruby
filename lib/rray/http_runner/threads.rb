@@ -5,14 +5,14 @@ module Rray
     class Threads < Base
       attr_reader :count
 
-      def initialize(url, count: 4)
-        super(url)
+      def initialize(url, count: 4, **options)
+        super(url, **options)
         @count = count
       end
 
-      def call
+      def call(poll: false)
         count.times.map do |i|
-          Thread.new { Sync.new(url).connect(i) }
+          Thread.new { Sync.new(url, poll: @poll).connect(i) }
         end.each(&:join)
       end
     end

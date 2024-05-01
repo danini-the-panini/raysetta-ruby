@@ -8,6 +8,7 @@ runner_opt = :sync
 concurrency_opt = nil
 output_path = nil
 options = {}
+poll = false
 opts_parser = OptionParser.new do |opts|
   opts.banner = "Usage: rray FILE_OR_URL [options]"
 
@@ -35,6 +36,10 @@ opts_parser = OptionParser.new do |opts|
   end
   opts.on("-o", "--output FILE", "Output file (default STDOUT)") do |o|
     output_path = o
+  end
+
+  opts.on("-p", "--poll", "Poll for new work when using URL") do |p|
+    poll = p
   end
 
   opts.on_tail("-h", "--help", "Show this message") do
@@ -66,7 +71,7 @@ if output_path.nil? && format_opt == :png
 end
 
 if URI.regexp.match?(file_or_url)
-  Rray.connect_to_server(file_or_url, runner: runner_opt, concurrency:)
+  Rray.connect_to_server(file_or_url, runner: runner_opt, concurrency:, poll:)
 else
   Rray.parse_scene(file_or_url,
     output_path:,

@@ -5,9 +5,12 @@ require 'http'
 module Rray
   module HttpRunner
     class Base
-      def initialize(url)
+      POLL_TIME = 1 # seconds
+
+      def initialize(url, poll: false)
         @url = url
         @tracers = {}
+        @poll = poll
       end
 
       def call
@@ -19,7 +22,11 @@ module Rray
         loop do
           puts "#{i}: Looking for work"
           slice = fetch_slice
-          break unless slice
+          if slice.nil?
+            break unless @poll
+            sleep POLL_TIME
+            next
+          end
           puts "#{i}: Tracing..."
 
           tracer = create_tracer(slice)
