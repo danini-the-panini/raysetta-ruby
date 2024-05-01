@@ -19,7 +19,7 @@ module Rray
         loop do
           puts "#{i}: Looking for work"
           slice = fetch_slice
-          return unless slice
+          break unless slice
           puts "#{i}: Tracing..."
 
           tracer = create_tracer(slice)
@@ -34,7 +34,7 @@ module Rray
           end
 
           puts "#{i}: Sending..."
-          HTTP.patch(URI.join(@url, 'slices/', "#{slice['id']}.json"), json: { slice: { data: row } })
+          send_slice(slice, row)
           puts "#{i}: Done"
         end
         puts "#{i}: Finishing"
@@ -64,6 +64,10 @@ module Rray
               max_depth: scene['depth']
             )
           end
+        end
+
+        def send_slice(slice, row)
+          HTTP.patch(URI.join(@url, 'slices/', "#{slice['id']}.json"), json: { slice: { data: row } })
         end
     end
   end
