@@ -47,11 +47,11 @@
     },
     "left": {
       "type": "Dielectric",
-      "refractive_index": 1.5
+      "refraction_index": 1.5
     },
     "bubble": {
       "type": "Dielectric",
-      "refractive_index": 0.6666666667
+      "refraction_index": 0.6666666667
     },
     "right": {
       "type": "Metal",
