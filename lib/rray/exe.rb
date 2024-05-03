@@ -1,7 +1,7 @@
 require 'optparse'
 require 'uri'
 
-require_relative "runner"
+$impl = :ruby
 
 format_opt = :ppm
 runner_opt = :sync
@@ -11,6 +11,10 @@ options = {}
 poll = false
 opts_parser = OptionParser.new do |opts|
   opts.banner = "Usage: rray FILE_OR_URL [options]"
+
+  opts.on("-i", "--impl IMPL", %i[ruby c], "Implementation (ruby, c; default ruby)") do |i|
+    $impl = i
+  end
 
   opts.on("-w", "--width WIDTH", Integer, "Image width (default 256)") do |w|
     options[:width] = w
@@ -48,11 +52,15 @@ opts_parser = OptionParser.new do |opts|
   end
 
   opts.on_tail("-v", "--version", "Show version") do
-    puts ::Rray::VERSION
+    require_relative "impl"
+    puts "runner #{Rray::Runner::VERSION}"
+    puts "#{$impl} #{::Impl::VERSION}"
     exit
   end
 end
 opts_parser.parse!
+
+require_relative "runner"
 
 if ARGV.size < 1
   warn "*** Missing FILE_OR_URL argument ***"
@@ -71,9 +79,9 @@ if output_path.nil? && format_opt == :png
 end
 
 if URI.regexp.match?(file_or_url)
-  Rray.connect_to_server(file_or_url, runner: runner_opt, concurrency:, poll:)
+  Rray::Runner.connect_to_server(file_or_url, runner: runner_opt, concurrency:, poll:)
 else
-  Rray.parse_scene(file_or_url,
+  Rray::Runner.parse_scene(file_or_url,
     output_path:,
     runner: runner_opt,
     format: format_opt,
