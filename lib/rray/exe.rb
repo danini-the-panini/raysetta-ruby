@@ -12,7 +12,7 @@ poll = false
 opts_parser = OptionParser.new do |opts|
   opts.banner = "Usage: rray FILE_OR_URL [options]"
 
-  opts.on("-i", "--impl IMPL", %i[ruby c], "Implementation (ruby, c; default ruby)") do |i|
+  opts.on("-i", "--impl IMPL", %i[ruby c rust], "Implementation (ruby, c, rust); default ruby)") do |i|
     $impl = i
   end
 

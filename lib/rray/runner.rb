@@ -43,7 +43,7 @@ module Rray
       if output_path
         out.save(output_path)
       else
-        puts out.call 
+        puts out.call
       end
     end
 

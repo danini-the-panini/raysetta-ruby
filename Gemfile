@@ -11,3 +11,4 @@ gem "minitest", "~> 5.16"
 
 gem "rray", path: "../rray"
 gem "cray", path: "../cray"
+gem "fray", path: "../fray-rb"
