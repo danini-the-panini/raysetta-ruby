@@ -12,7 +12,7 @@ module Rray
 
       def call
         pids = count.times.map do |i|
-          Process.fork { connect(i) }
+          Process.fork { Base.new(@url, poll: @poll).connect(i) }
         end
         pids.each { Process.wait _1 }
       end

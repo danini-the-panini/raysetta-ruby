@@ -5,15 +5,8 @@ module Rray
     class Ractors < Base
       attr_reader :count
 
-      def initialize(url, count: 4, **options)
-        super(url, **options)
-        @count = count
-      end
-
-      def call
-        count.times.map do |i|
-          Ractor.new(url, i, @poll) { |url, i, poll| Sync.new(url, poll:).connect(i) }
-        end.each(&:take)
+      def initialize(...)
+        raise NotImplementedError, "Ractor HTTP runner not implemented"
       end
     end
   end

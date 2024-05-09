@@ -12,7 +12,7 @@ module Rray
 
       def call(poll: false)
         count.times.map do |i|
-          Thread.new { Sync.new(url, poll: @poll).connect(i) }
+          Thread.new { Base.new(@url, poll: @poll).connect(i) }
         end.each(&:join)
       end
     end
