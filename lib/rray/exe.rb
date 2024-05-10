@@ -1,5 +1,6 @@
 require 'optparse'
 require 'uri'
+require 'etc'
 
 $impl = :ruby
 
@@ -71,7 +72,7 @@ end
 file_or_url = ARGV.first
 
 warn "WARN: Ignoring concurrency argument" if concurrency_opt && runner_opt == :sync
-concurrency = concurrency_opt || 4
+concurrency = concurrency_opt || Etc.nprocessors
 
 if output_path.nil? && format_opt == :png
   warn "*** Refusing to output PNG to STDOUT ***"

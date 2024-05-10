@@ -5,12 +5,7 @@ require 'parallel'
 module Rray
   module Runner
     class Ractors < Base
-      attr_reader :count, :output
-
-      def initialize(tracer, count: 4)
-        super(tracer)
-        @count = count
-      end
+      attr_reader :output
 
       def call
         Ractor.make_shareable(tracer)

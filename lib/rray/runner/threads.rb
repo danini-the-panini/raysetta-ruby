@@ -5,12 +5,7 @@ require 'parallel'
 module Rray
   module Runner
     class Threads < Base
-      attr_reader :count, :output
-
-      def initialize(tracer, count: 4)
-        super(tracer)
-        @count = count
-      end
+      attr_reader :output
 
       def call
         @output = Parallel.map(tracer.height.times.to_a, in_threads: count, finish: proc { progress }) do |y|

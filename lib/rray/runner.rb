@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
+require "etc"
+
 require_relative "impl"
 
 require_relative "runner/version"
 require_relative "runner/base"
+require_relative "runner/concurrent"
 require_relative "runner/sync"
 require_relative "runner/threads"
 require_relative "runner/ractors"
 require_relative "runner/processes"
 require_relative "http_runner/base"
+require_relative "http_runner/concurrent"
 require_relative "http_runner/sync"
 require_relative "http_runner/threads"
 require_relative "http_runner/ractors"
@@ -19,7 +23,7 @@ require_relative "output/png"
 
 module Rray
   module Runner
-    def self.parse_scene(input_path, output_path: nil, runner: :sync, format: :ppm, concurrency: 4, **options)
+    def self.parse_scene(input_path, output_path: nil, runner: :sync, format: :ppm, concurrency: Etc.nprocessors, **options)
       scene = Impl::Scene.parse(JSON.parse(File.read(input_path)))
 
       tracer = Impl::Tracer.new(scene, **options)
@@ -47,7 +51,7 @@ module Rray
       end
     end
 
-    def self.connect_to_server(url, runner: :sync, concurrency: 4, poll: false)
+    def self.connect_to_server(url, runner: :sync, concurrency: Etc.nprocessors, poll: false)
       runner = case runner
       when :sync then Rray::HttpRunner::Sync.new(url, poll:)
       when :threads then Rray::HttpRunner::Threads.new(url, count: concurrency, poll:)

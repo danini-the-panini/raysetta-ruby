@@ -2,7 +2,7 @@
 
 module Rray
   module HttpRunner
-    class Ractors < Base
+    class Ractors < Concurrent
       attr_reader :count
 
       def initialize(...)

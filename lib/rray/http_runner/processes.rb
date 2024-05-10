@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
+require 'etc'
+
 module Rray
   module HttpRunner
-    class Processes < Base
-      attr_reader :count
-
-      def initialize(url, count: 4, **options)
-        super(url, **options)
-        @count = count
-      end
+    class Processes < Concurrent
 
       def call
         pids = count.times.map do |i|
