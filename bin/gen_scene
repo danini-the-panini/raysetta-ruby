@@ -6,7 +6,8 @@ require "rray/runner"
 
 world = Rray::Object::Group.new
 
-ground_material = Rray::Material::Lambertian.new(Rray::Color.new(0.5, 0.5, 0.5))
+checker = Rray::Texture::Checker.solid(0.32, Rray::Color.new(0.2, 0.3, 0.1), Rray::Color.new(0.9, 0.9, 0.9))
+ground_material = Rray::Material::Lambertian.new(checker)
 world << Rray::Object::Sphere.new(Rray::Point3.new(0.0, -1000.0, 0.0), 1000.0, ground_material)
 
 glass = Rray::Material::Dielectric.new(1.5)
@@ -20,14 +21,14 @@ glass = Rray::Material::Dielectric.new(1.5)
       if choose_mat > 0.8
         # diffuse
         albedo = Rray::Color.random.multiply(Rray::Color.random)
-        material = Rray::Material::Lambertian.new(albedo)
+        material = Rray::Material::Lambertian.solid(albedo)
         center2 = center + Rray::Vec3.new(0.0, Rray::Util.random(0.0, 0.5), 0.0)
         world << Rray::Object::MovingSphere.new(center, center2, 0.2, material)
       elsif choose_mat < 0.95
         # metal
         albedo = Rray::Color.random(0.5, 1.0)
         fuzz = Rray::Util.random(0.0, 0.5)
-        material = Rray::Material::Metal.new(albedo, fuzz)
+        material = Rray::Material::Metal.solid(albedo, fuzz)
         world << Rray::Object::Sphere.new(center, 0.2, material)
       else
         # glass
@@ -41,10 +42,10 @@ end
 material1 = glass
 world << Rray::Object::Sphere.new(Rray::Point3.new(0.0, 1.0, 0.0), 1.0, material1)
 
-material2 = Rray::Material::Lambertian.new(Rray::Color.new(0.4, 0.2, 0.1))
+material2 = Rray::Material::Lambertian.solid(Rray::Color.new(0.4, 0.2, 0.1))
 world << Rray::Object::Sphere.new(Rray::Point3.new(-4.0, 1.0, 0.0), 1.0, material2)
 
-material3 = Rray::Material::Metal.new(Rray::Color.new(0.7, 0.6, 0.5), 0.0)
+material3 = Rray::Material::Metal.solid(Rray::Color.new(0.7, 0.6, 0.5), 0.0)
 world << Rray::Object::Sphere.new(Rray::Point3.new(4.0, 1.0, 0.0), 1.0, material3)
 
 camera = Rray::Camera.new(
