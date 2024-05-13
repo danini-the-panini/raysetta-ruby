@@ -67,13 +67,12 @@ module Rray
       def initialize(url)
         @url = url
         @queue = []
-        5.times { puts "fetch?"; @queue.unshift(fetch) }
+        5.times { @queue.unshift(fetch) }
       end
 
       def slice
-        puts "slice?"
         if @queue.size <= 5
-          (5 - @queue.size + 1).times { puts "fetch?"; @queue.unshift(fetch) }
+          (5 - @queue.size + 1).times { @queue.unshift(fetch) }
         end
 
         @queue.pop.value

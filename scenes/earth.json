@@ -1,18 +1,15 @@
 {
   "world": {
-    "type": "Group",
-    "objects": [
-      {
-        "type": "Sphere",
-        "center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "radius": 2.0,
-        "material": "lambertian-b4668"
-      }
-    ]
+    "earth": {
+      "type": "Sphere",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 2.0,
+      "material": "lambertian-b4668"
+    }
   },
   "camera": {
     "vfov": 20.0,
