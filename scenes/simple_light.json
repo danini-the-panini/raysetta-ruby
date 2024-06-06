@@ -1,69 +1,69 @@
 {
-  "world": {
-    "sphere-e0b0": {
-      "type": "Sphere",
-      "center": [
-        0.0,
-        -1000.0,
-        0.0
-      ],
-      "radius": 1000.0,
-      "material": "lambertian-e09c"
-    },
-    "sphere-e0c4": {
-      "type": "Sphere",
-      "center": [
-        0.0,
-        2.0,
-        0.0
-      ],
-      "radius": 2.0,
-      "material": "lambertian-e09c"
-    }
+  "background": {
+    "type": "Solid",
+    "albedo": [0.0, 0.0, 0.0]
   },
   "camera": {
     "vfov": 20.0,
-    "lookfrom": [
-      12.0,
-      2.0,
-      3.0
-    ],
-    "lookat": [
-      0.0,
-      0.0,
-      0.0
-    ],
-    "vup": [
-      0.0,
-      1.0,
-      0.0
-    ],
+    "lookfrom": [36.0, 3.0, 6.0],
+    "lookat": [0.0, 2.0, 0.0],
+    "vup": [0.0, 1.0, 0.0],
     "defocus_angle": 0.0,
     "focus_dist": 10.0
   },
-  "background": {
-    "type": "Gradient",
-    "top": [0.5, 0.7, 1.0],
-    "bottom": [1.0, 1.0, 1.0]
-  },
-  "materials": {
-    "lambertian-e09c": {
-      "type": "Lambertian",
-      "texture": "noise-e0d8"
+  "world": {
+    "ground": {
+      "type": "Sphere",
+      "center": [0.0, -1000.0, 0.0],
+      "radius": 1000.0,
+      "material": "noise"
+    },
+    "ball": {
+      "type": "Sphere",
+      "center": [0.0, 2.0, 0.0],
+      "radius": 2.0,
+      "material": "noise"
+    },
+    "light": {
+      "type": "Quad",
+      "q": [3.0,1.0,-2.0],
+      "u": [2.0,0.0,0.0],
+      "v": [0.0,2.0,0.0],
+      "material": "light"
+    },
+    "light2": {
+      "type": "Sphere",
+      "center": [0.0, 7.0, 0.0],
+      "radius": 2.0,
+      "material": "light"
     }
   },
+  "materials": {
+    "noise": {
+      "type": "Lambertian",
+      "texture": "noise"
+    },
+    "light": {
+      "type": "DiffuseLight",
+      "texture": "light"
+    }
+  },
+  "images": {},
   "textures": {
-    "noise-e0d8": {
+    "noise": {
       "type": "Noise",
       "scale": 4.0,
       "depth": 7,
       "marble_axis": "z",
-      "noise": "perlin-e0ec"
+      "noise": "perlin"
+    },
+    "light": {
+      "type": "SolidColor",
+      "albedo": [4.0, 4.0, 4.0]
     }
   },
-  "images": {},
   "noises": {
-    "perlin-e0ec": {
+    "perlin": {
       "type": "Perlin",
       "randvec": [
         [
