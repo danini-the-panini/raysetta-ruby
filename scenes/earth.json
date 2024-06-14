@@ -9,6 +9,12 @@
       ],
       "radius": 2.0,
       "material": "lambertian-c46e4"
+    },
+    "sun": {
+      "type": "Sphere",
+      "center": [1000.0, 0.0, 100.0],
+      "radius": 100.0,
+      "material": "sun"
     }
   },
   "camera": {
@@ -39,6 +45,10 @@
     "lambertian-c46e4": {
       "type": "Lambertian",
       "texture": "image-c470c"
+    },
+    "sun": {
+      "type": "DiffuseLight",
+      "texture": "sun"
     }
   },
   "textures": {
@@ -49,6 +59,10 @@
     "image-c46f8": {
       "type": "Image",
       "image": "image-c4734"
+    },
+    "sun": {
+      "type": "SolidColor",
+      "albedo": [244.0, 233.0, 155.0]
     }
   },
   "images": {
