@@ -6,7 +6,6 @@ runner_opt = :sync
 concurrency_opt = nil
 output_path = nil
 options = {}
-poll = false
 opts_parser = OptionParser.new do |opts|
   opts.banner = "Usage: raysetta FILE [options]"
 
@@ -34,10 +33,6 @@ opts_parser = OptionParser.new do |opts|
   end
   opts.on("-o", "--output FILE", "Output file (default STDOUT)") do |o|
     output_path = o
-  end
-
-  opts.on("-p", "--poll", "Poll for new work when using URL") do |p|
-    poll = p
   end
 
   opts.on_tail("-h", "--help", "Show this message") do

@@ -8,12 +8,6 @@ require_relative "runner/sync"
 require_relative "runner/threads"
 require_relative "runner/ractors"
 require_relative "runner/processes"
-require_relative "http_runner/base"
-require_relative "http_runner/concurrent"
-require_relative "http_runner/sync"
-require_relative "http_runner/threads"
-require_relative "http_runner/ractors"
-require_relative "http_runner/processes"
 require_relative "output/base"
 require_relative "output/ppm"
 require_relative "output/png"
@@ -46,19 +40,6 @@ module Raysetta
       else
         puts out.call
       end
-    end
-
-    def self.connect_to_server(url, runner: :sync, concurrency: Etc.nprocessors, poll: false)
-      runner = case runner
-      when :sync then Raysetta::HttpRunner::Sync.new(url, poll:)
-      when :threads then Raysetta::HttpRunner::Threads.new(url, count: concurrency, poll:)
-      when :ractors then Raysetta::HttpRunner::Ractors.new(url, count: concurrency, poll:)
-      when :processes then Raysetta::HttpRunner::Processes.new(url, count: concurrency, poll:)
-      else
-        warn "*** Unknown runner #{runner} ***"
-        exit
-      end
-      runner.call
     end
   end
 end
