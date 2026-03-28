@@ -1,37 +1,59 @@
-# Rray::Runner
+# Raysetta Ruby
 
-Runner for [rray](https://github.com/danini-the-panini/rray). Can be used as a CLI or Library.
+A raytracer written in Ruby. Part of the Raysetta project. Based on [Ray Tracing in One Weekend](https://raytracing.github.io/).
 
 ## Installation
 
-TODO: Replace `rray-runner` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add rray-runner
+    $ bundle add raysetta
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install rray-runner
+    $ gem install raysetta
 
 ## Usage
 
 ### CLI
 
 ```
-$ rray scene.json --width 800 --height 600 --samples 50 --depth 100 --format ppm -o output.ppm
+$ raysetta scene.json --width 800 --height 600 --samples 50 --depth 100 --format ppm -o output.ppm
 ```
 
 ### Gem
 
-```ruby
-require "rray"
+#### Raytracer
 
-scene = Rray::Scene.parse(File.read("scene.json"))
-tracer = Rray::Tracer.new(scene, width: 800, height: 600, samples_per_pixel: 50, max_depth: 100)
-runner = Rray::Runner::Sync.new(tracer)
+```ruby
+require "raysetta"
+
+scene = Raysetta::Scene.parse(File.read("scene.json"))
+tracer = Raysetta::Tracer.new(scene, width: 800, height: 600, samples_per_pixel: 50, max_depth: 100)
+
+output = Array.new(tracer.height) { Array.new(tracer.width) { [0, 0, 0] } }
+output.each.with_index do |row, i|
+  row.each.with_index do |pixel, j|
+    r, g, b = tracer.call(j, i)
+
+    pixel[0] = r
+    pixel[1] = g
+    pixel[2] = b
+  end
+end
+
+# store output as an image
+```
+
+#### Runner
+
+```ruby
+require "raysetta/runner"
+
+scene = Raysetta::Scene.parse(File.read("scene.json"))
+tracer = Raysetta::Tracer.new(scene, width: 800, height: 600, samples_per_pixel: 50, max_depth: 100)
+runner = Raysetta::Runner::Sync.new(tracer)
 runner.call
-out = Rray::Output::PPM.new(runner.output, width: tracer.width, height: tracer.height)
+out = Raysetta::Output::PPM.new(runner.output, width: tracer.width, height: tracer.height)
 out.save("output.ppm")
 ```
 
@@ -43,7 +65,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/danini-the-panini/rray-runner.
+Bug reports and pull requests are welcome on GitHub at https://github.com/danini-the-panini/raysetta-ruby.
 
 ## License
 

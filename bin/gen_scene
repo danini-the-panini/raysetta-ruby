@@ -2,61 +2,61 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "rray/runner"
+require "raysetta/runner"
 
-world = Rray::Object::Group.new
+world = Raysetta::Object::Group.new
 
-checker = Rray::Texture::Checker.solid(0.32, Rray::Color.new(0.2, 0.3, 0.1), Rray::Color.new(0.9, 0.9, 0.9))
-ground_material = Rray::Material::Lambertian.new(checker)
-world << Rray::Object::Sphere.new(Rray::Point3.new(0.0, -1000.0, 0.0), 1000.0, ground_material)
+checker = Raysetta::Texture::Checker.solid(0.32, Raysetta::Color.new(0.2, 0.3, 0.1), Raysetta::Color.new(0.9, 0.9, 0.9))
+ground_material = Raysetta::Material::Lambertian.new(checker)
+world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(0.0, -1000.0, 0.0), 1000.0, ground_material)
 
-glass = Rray::Material::Dielectric.new(1.5)
+glass = Raysetta::Material::Dielectric.new(1.5)
 
 (-11...11).each do |a|
   (-11...11).each do |b|
     choose_mat = rand
-    center = Rray::Point3.new(a + 0.9*rand, 0.2, b + 0.9*rand)
+    center = Raysetta::Point3.new(a + 0.9*rand, 0.2, b + 0.9*rand)
 
-    if (center - Rray::Point3.new(4.0, 0.2, 0.0)).length > 0.9
+    if (center - Raysetta::Point3.new(4.0, 0.2, 0.0)).length > 0.9
       if choose_mat > 0.8
         # diffuse
-        albedo = Rray::Color.random.multiply(Rray::Color.random)
-        material = Rray::Material::Lambertian.solid(albedo)
-        center2 = center + Rray::Vec3.new(0.0, Rray::Util.random(0.0, 0.5), 0.0)
-        world << Rray::Object::MovingSphere.new(center, center2, 0.2, material)
+        albedo = Raysetta::Color.random.multiply(Raysetta::Color.random)
+        material = Raysetta::Material::Lambertian.solid(albedo)
+        center2 = center + Raysetta::Vec3.new(0.0, Raysetta::Util.random(0.0, 0.5), 0.0)
+        world << Raysetta::Object::MovingSphere.new(center, center2, 0.2, material)
       elsif choose_mat < 0.95
         # metal
-        albedo = Rray::Color.random(0.5, 1.0)
-        fuzz = Rray::Util.random(0.0, 0.5)
-        material = Rray::Material::Metal.solid(albedo, fuzz)
-        world << Rray::Object::Sphere.new(center, 0.2, material)
+        albedo = Raysetta::Color.random(0.5, 1.0)
+        fuzz = Raysetta::Util.random(0.0, 0.5)
+        material = Raysetta::Material::Metal.solid(albedo, fuzz)
+        world << Raysetta::Object::Sphere.new(center, 0.2, material)
       else
         # glass
         material = glass
-        world << Rray::Object::Sphere.new(center, 0.2, material)
+        world << Raysetta::Object::Sphere.new(center, 0.2, material)
       end
     end
   end
 end
 
 material1 = glass
-world << Rray::Object::Sphere.new(Rray::Point3.new(0.0, 1.0, 0.0), 1.0, material1)
+world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(0.0, 1.0, 0.0), 1.0, material1)
 
-material2 = Rray::Material::Lambertian.solid(Rray::Color.new(0.4, 0.2, 0.1))
-world << Rray::Object::Sphere.new(Rray::Point3.new(-4.0, 1.0, 0.0), 1.0, material2)
+material2 = Raysetta::Material::Lambertian.solid(Raysetta::Color.new(0.4, 0.2, 0.1))
+world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(-4.0, 1.0, 0.0), 1.0, material2)
 
-material3 = Rray::Material::Metal.solid(Rray::Color.new(0.7, 0.6, 0.5), 0.0)
-world << Rray::Object::Sphere.new(Rray::Point3.new(4.0, 1.0, 0.0), 1.0, material3)
+material3 = Raysetta::Material::Metal.solid(Raysetta::Color.new(0.7, 0.6, 0.5), 0.0)
+world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(4.0, 1.0, 0.0), 1.0, material3)
 
-camera = Rray::Camera.new(
+camera = Raysetta::Camera.new(
   vfov: 20,
-  lookfrom: Rray::Point3.new(13.0, 2.0, 3.0),
-  lookat: Rray::Point3.new(0.0, 0.0, 0.0),
-  vup: Rray::Vec3.new(0.0, 1.0, 0.0),
+  lookfrom: Raysetta::Point3.new(13.0, 2.0, 3.0),
+  lookat: Raysetta::Point3.new(0.0, 0.0, 0.0),
+  vup: Raysetta::Vec3.new(0.0, 1.0, 0.0),
   defocus_angle: 0.6,
   focus_dist: 10.0
 )
 
-scene = Rray::Scene.new(world, camera)
+scene = Raysetta::Scene.new(world, camera)
 
 puts scene.export.to_json
