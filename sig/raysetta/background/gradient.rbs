@@ -1,10 +1,10 @@
 module Raysetta
   module Background
     class Gradient < Base
-      attr_accessor top: Color
-      attr_accessor bottom: Color
+      attr_accessor top: Vec3
+      attr_accessor bottom: Vec3
 
-      def initialize: (Color top, Color bottom) -> void
+      def initialize: (Vec3 top, Vec3 bottom) -> void
     end
   end
 end

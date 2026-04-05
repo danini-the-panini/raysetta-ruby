@@ -8,6 +8,6 @@ module Raysetta
     def width: () -> Integer
     def height: () -> Integer
 
-    def []: (Integer x, Integer y) -> Color
+    def []: (Integer x, Integer y) -> Vec3
   end
 end

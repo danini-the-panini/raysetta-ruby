@@ -12,7 +12,7 @@ module Raysetta
       end
 
       def scatter(r_in, rec)
-        attenuation = Color.new(1.0, 1.0, 1.0)
+        attenuation = Vec3.new(1.0)
         ri = rec.front_face? ? 1.0/refraction_index : refraction_index
 
         unit_direction = r_in.direction.unit

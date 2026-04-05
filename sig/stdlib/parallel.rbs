@@ -1,5 +1,5 @@
 module Parallel
-  def self.map: (Array[untyped], in_threads: Integer, ?finish: Proc) { (untyped) -> untyped } -> Array[untyped]
-              | (Array[untyped], in_processes: Integer, ?finish: Proc) { (untyped) -> untyped } -> Array[untyped]
-              | (Array[untyped], in_ractors: Integer, ractor: [Class, Symbol], ?finish: Proc) -> Array[untyped]
+  def self.map: [I, O] (Array[I], in_threads: Integer, ?finish: Proc) { (I) -> O } -> Array[O]
+              | [I, O] (Array[I], in_processes: Integer, ?finish: Proc) { (I) -> O } -> Array[O]
+              | [I] (Array[I], in_ractors: Integer, ractor: [Class, Symbol], ?finish: Proc) -> Array[untyped]
 end

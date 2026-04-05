@@ -1,7 +1,7 @@
 module Raysetta
   module Material
     class Base < EntityBase
-      def emitted: (Vec2 uv, Vec3 point) -> Color
+      def emitted: (Vec2 uv, Vec3 point) -> Vec3
       def scatter: (Ray r_in, Hit rec) -> Scatter?
 
       def export: () -> Hash[Symbol, untyped]

@@ -16,7 +16,7 @@ module Raysetta
     end
 
     def call(x, y)
-      pixel_color = Color.new(0.0, 0.0, 0.0)
+      pixel_color = Vec3.new
       samples_per_pixel.times do
         pixel_color.add(ray_color(scene.camera.ray(x, y)))
       end
@@ -25,7 +25,7 @@ module Raysetta
 
     def ray_color(r, depth = max_depth)
       # If we've exceeded the ray bounce limit, no more light is gathered.
-      return Color.new(0.0, 0.0, 0.0) unless depth > 0
+      return Vec3.new unless depth > 0
 
       rec = scene.world.hit(r, 0.001..Float::INFINITY)
       # If the ray hits nothing, return the background color.

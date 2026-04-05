@@ -7,13 +7,10 @@ class Minitest::Test
   def vec3(x, y, z)
     Raysetta::Vec3.new(x, y, z)
   end
+  alias :rgb :vec3
 
   def vec2(x, y)
     Raysetta::Vec2.new(x, y)
-  end
-
-  def rgb(r, g, b)
-    Raysetta::Color.new(r, g, b)
   end
 
   def ray(o, d, t=0.0)

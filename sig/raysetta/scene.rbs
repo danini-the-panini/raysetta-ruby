@@ -60,6 +60,10 @@ module Raysetta
       def parse_gradient_bg: (Hash[String, untyped] bg) -> Background::Gradient
       def parse_sphere_map: (Hash[String, untyped] bg) -> Background::SphereMap
       def parse_cube_map: (Hash[String, untyped] bg) -> Background::CubeMap
+
+      def vec2: (Array[Float]) -> Vec2
+      def vec3: (Array[Float]) -> Vec3
+      alias rgb vec3
     end
   end
 end

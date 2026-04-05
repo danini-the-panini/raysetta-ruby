@@ -9,7 +9,7 @@ module Raysetta
 
       def call
         @output = Parallel.map(tracer.height.times.to_a, in_processes: count, finish: proc { progress }) do |y|
-          row = Array.new(tracer.width) { [0, 0, 0] }
+          row = Array.new(tracer.width) { [0, 0, 0] } #: Array[[Integer, Integer, Integer]]
           row.each.with_index do |pixel, x|
             r, g, b = tracer.call(x, y)
                   

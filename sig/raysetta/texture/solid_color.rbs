@@ -1,9 +1,9 @@
 module Raysetta
   module Texture
     class SolidColor < Base
-      attr_accessor albedo: Color
+      attr_accessor albedo: Vec3
 
-      def initialize: (Color albedo) -> void
+      def initialize: (Vec3 albedo) -> void
       def self.rgb: (Float r, Float g, Float b) -> instance
     end
   end

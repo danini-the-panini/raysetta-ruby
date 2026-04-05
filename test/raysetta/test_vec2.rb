@@ -3,12 +3,9 @@
 require "test_helper"
 
 class TestVec2 < Minitest::Test
-  def test_dimensions
-    assert_equal 2, Raysetta::Vec2.dimensions
-  end
-
-  def test_repeat
-    assert_equal Raysetta::Vec2.new(2.7, 2.7), Raysetta::Vec2.repeat(2.7)
+  def test_new
+    assert_equal Raysetta::Vec2.new(0.0, 0.0), Raysetta::Vec2.new
+    assert_equal Raysetta::Vec2.new(2.7, 2.7), Raysetta::Vec2.new(2.7)
   end
 
   def test_unary_minus
@@ -22,7 +19,7 @@ class TestVec2 < Minitest::Test
   end
 
   def test_aset
-    v = Raysetta::Vec2.repeat(99.0)
+    v = Raysetta::Vec2.new(99.0)
     v[0] = 1.0
     v[1] = 2.0
     assert_equal Raysetta::Vec2.new(1.0, 2.0), v
@@ -37,7 +34,7 @@ class TestVec2 < Minitest::Test
   end
 
   def test_setters
-    v = Raysetta::Vec2.repeat(99.0)
+    v = Raysetta::Vec2.new(99.0)
     v.x = 1.0
     v.y = 2.0
     assert_equal Raysetta::Vec2.new(1.0, 2.0), v
@@ -100,7 +97,7 @@ class TestVec2 < Minitest::Test
 
   def test_length
     v = Raysetta::Vec2.new(1.0, 2.0)
-    assert_in_delta 2.236067977, v.length, Raysetta::Vec2::EPSILON
+    assert_in_delta 2.236067977, v.length, Raysetta::Util::EPSILON
   end
 
   def test_length_squared
@@ -130,17 +127,6 @@ class TestVec2 < Minitest::Test
     v2 = v.dup
     assert_equal v, v2
     refute v.equal?(v2)
-  end
-
-  def test_smoothstep
-    v = Raysetta::Vec2.new(1.0, 2.0)
-    assert_equal Raysetta::Vec2.new(1.0, -4.0), v.smoothstep
-  end
-
-  def test_smoothstep_bang
-    v = Raysetta::Vec2.new(1.0, 2.0)
-    v.smoothstep!
-    assert_equal Raysetta::Vec2.new(1.0, -4.0), v
   end
 
   def test_zero

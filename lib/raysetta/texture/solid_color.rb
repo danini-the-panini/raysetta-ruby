@@ -10,7 +10,7 @@ module Raysetta
       end
 
       def self.rgb(r, g, b)
-        new(Color.new(r, g, b))
+        new(Vec3.new(r, g, b))
       end
 
       def sample(uv, point)

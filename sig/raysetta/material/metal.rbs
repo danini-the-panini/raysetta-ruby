@@ -5,7 +5,7 @@ module Raysetta
       attr_accessor fuzz: Float
 
       def initialize: (Texture::Base texture, Float fuzz) -> void
-      def self.solid: (Color albedo, Float fuzz) -> instance
+      def self.solid: (Vec3 albedo, Float fuzz) -> instance
     end
   end
 end

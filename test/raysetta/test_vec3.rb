@@ -3,12 +3,9 @@
 require "test_helper"
 
 class TestVec3 < Minitest::Test
-  def test_dimensions
-    assert_equal 3, Raysetta::Vec3.dimensions
-  end
-
-  def test_repeat
-    assert_equal Raysetta::Vec3.new(2.7, 2.7, 2.7), Raysetta::Vec3.repeat(2.7)
+  def test_new
+    assert_equal Raysetta::Vec3.new(0.0, 0.0, 0.0), Raysetta::Vec3.new
+    assert_equal Raysetta::Vec3.new(2.7, 2.7, 2.7), Raysetta::Vec3.new(2.7)
   end
 
   def test_unary_minus
@@ -23,7 +20,7 @@ class TestVec3 < Minitest::Test
   end
 
   def test_aset
-    v = Raysetta::Vec3.repeat(99.0)
+    v = Raysetta::Vec3.new(99.0)
     v[0] = 1.0
     v[1] = 2.0
     v[2] = 3.0
@@ -38,7 +35,7 @@ class TestVec3 < Minitest::Test
   end
 
   def test_setters
-    v = Raysetta::Vec3.repeat(99.0)
+    v = Raysetta::Vec3.new(99.0)
     v.x = 1.0
     v.y = 2.0
     v.z = 3.0
@@ -85,6 +82,12 @@ class TestVec3 < Minitest::Test
     assert_equal Raysetta::Vec3.new(2.0, 4.0, 6.0), v
   end
 
+  def test_multiply
+    c = Raysetta::Vec3.new(0.1, 0.2, 0.3)
+    c.multiply(Raysetta::Vec3.new(0.9, 0.8, 0.7))
+    assert_equal Raysetta::Vec3.new(0.09, 0.16, 0.21), c
+  end
+
   def test_div
     v = Raysetta::Vec3.new(1.0, 2.0, 3.0)
     v.div(2.0)
@@ -99,7 +102,7 @@ class TestVec3 < Minitest::Test
 
   def test_length
     v = Raysetta::Vec3.new(1.0, 2.0, 3.0)
-    assert_in_delta 3.741657387, v.length, Raysetta::Vec3::EPSILON
+    assert_in_delta 3.741657387, v.length, Raysetta::Util::EPSILON
   end
 
   def test_length_squared
@@ -140,6 +143,12 @@ class TestVec3 < Minitest::Test
     v = Raysetta::Vec3.new(1.0, 2.0, 3.0)
     v.smoothstep!
     assert_equal Raysetta::Vec3.new(1.0, -4.0, -27.0), v
+  end
+
+  def test_to_pixel
+    c = Raysetta::Vec3.new(0.1, 0.2, 0.3)
+
+    assert_equal [80, 114, 140], c.to_pixel
   end
 
   def test_zero
@@ -186,14 +195,14 @@ class TestVec3 < Minitest::Test
 
   def test_random_unit_vector
     v = Raysetta::Vec3.random_unit
-    assert_in_delta 1.0, v.length, Raysetta::Vec3::EPSILON
+    assert_in_delta 1.0, v.length, Raysetta::Util::EPSILON
   end
 
   def test_random_on_hemisphere
     n = Raysetta::Vec3.new(0.0, 1.0, 0.0)
     v = Raysetta::Vec3.random_on_hemisphere(n)
 
-    assert_in_delta 1.0, v.length, Raysetta::Vec3::EPSILON
+    assert_in_delta 1.0, v.length, Raysetta::Util::EPSILON
     assert v.y.positive?
   end
 

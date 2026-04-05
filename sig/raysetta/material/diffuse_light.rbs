@@ -4,7 +4,7 @@ module Raysetta
       attr_accessor texture: Texture::Base
 
       def initialize: (Texture::Base texture) -> void
-      def self.solid: (Color albedo) -> instance
+      def self.solid: (Vec3 albedo) -> instance
 
       def textures: () -> [Texture::Base]
     end

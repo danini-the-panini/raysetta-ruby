@@ -1,7 +1,7 @@
 module Raysetta
   module Background
     class Base < EntityBase
-      def sample: (Ray r) -> Color
+      def sample: (Ray r) -> Vec3
 
       def export: () -> Hash[Symbol, untyped]
       def textures: () -> Array[Texture::Base]

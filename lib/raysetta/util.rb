@@ -2,6 +2,8 @@
 
 module Raysetta
   module Util
+    EPSILON = 1e-8
+
     def self.degrees_to_radians(degrees) = degrees * Math::PI / 180.0
 
     # Returns a random real in [min,max).

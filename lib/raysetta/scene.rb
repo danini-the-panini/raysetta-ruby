@@ -35,9 +35,11 @@ module Raysetta
     private
 
     def export_by_id(entities)
-      entities.each_with_object({}) do |entity, exported|
+      exported = {} #: Hash[String, Hash[Symbol, untyped]]
+      entities.each do |entity|
         exported[entity.id] = entity.export
       end
+      exported
     end
 
     class Parser
@@ -63,7 +65,7 @@ module Raysetta
 
       def parse_noise(noise)
         Perlin.new(
-          noise["randvec"].map { |v| vec3(v)) },
+          noise["randvec"].map { |v| vec3(v) },
           noise["perm_x"],
           noise["perm_y"],
           noise["perm_z"]
@@ -76,7 +78,7 @@ module Raysetta
 
       def parse_texture(tex)
         case tex["type"]
-        when "SolidColor" then Texture::SolidColor.new(color(tex["albedo"]))
+        when "SolidColor" then Texture::SolidColor.new(rgb(tex["albedo"]))
         when "Checker" then Texture::Checker.new(tex["scale"], parse_texture(tex["even"]), parse_texture(tex["odd"]))
         when "Image" then Texture::Image.new(image(tex["image"]))
         when "Noise" then Texture::Noise.new(tex["scale"], tex["depth"], tex["marble_axis"]&.to_sym, noise(tex["noise"]))
@@ -154,7 +156,7 @@ module Raysetta
       end
 
       def parse_camera(cam)
-        args = {}
+        args = {} #: Hash[Symbol, untyped]
         args[:vfov] = cam["vfov"] if cam.key?("vfov")
         args[:lookfrom] = vec3(cam["lookfrom"]) if cam.key?("lookfrom")
         args[:lookat] = vec3(cam["lookat"]) if cam.key?("lookat")
@@ -175,11 +177,11 @@ module Raysetta
       end
 
       def parse_solid_bg(bg)
-        Background::Solid.new(color(bg["albedo"]))
+        Background::Solid.new(rgb(bg["albedo"]))
       end
 
       def parse_gradient_bg(bg)
-        Background::Gradient.new(color(bg["top"]), color(bg["bottom"]))
+        Background::Gradient.new(rgb(bg["top"]), rgb(bg["bottom"]))
       end
 
       def parse_sphere_map(bg)
@@ -193,13 +195,10 @@ module Raysetta
       def vec3(e)
         Vec3.new(e[0], e[1], e[2])
       end
+      alias :rgb :vec3
 
       def vec2(e)
         Vec2.new(e[0], e[1])
-      end
-
-      def color(e)
-        Color.new(e[0], e[1], e[2])
       end
     end
   end

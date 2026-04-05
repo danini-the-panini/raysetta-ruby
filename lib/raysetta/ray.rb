@@ -17,7 +17,7 @@ module Raysetta
     def ==(r)
       origin == r.origin &&
       direction == r.direction &&
-      (time- r.time).abs < Vec3::EPSILON
+      (time- r.time).abs < Util::EPSILON
     end
     alias :eql? :==
 
