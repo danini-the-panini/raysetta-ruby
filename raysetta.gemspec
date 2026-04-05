@@ -32,5 +32,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "progress", "~> 3.6"
   spec.add_dependency "chunky_png", "~> 1.4"
-  spec.add_dependency "parallel", "~> 1.24"
+  spec.add_dependency "parallel", "~> 2.0"
 end
