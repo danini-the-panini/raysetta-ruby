@@ -1,0 +1,16 @@
+module Raysetta
+  module Object
+    class Group < Base
+      attr_reader objects: Array[Object::Base]
+      attr_reader bounding_box: AABB
+
+      def initialize: (*Object::Base objects) -> void
+
+      def objects=: (Array[Object::Base] objs) -> void
+
+      def add: (Object::Base obj) -> void
+
+      def export: () -> Hash[Symbol, untyped]
+    end
+  end
+end

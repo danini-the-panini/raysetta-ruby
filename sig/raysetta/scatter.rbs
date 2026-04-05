@@ -1,0 +1,11 @@
+module Raysetta
+  class Scatter
+    @ray: Ray
+    @attenuation: Color
+
+    attr_accessor ray: Ray
+    attr_accessor attenuation: Color
+
+    def initialize: (Ray ray, Color attenuation) -> void
+  end
+end

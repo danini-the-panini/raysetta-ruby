@@ -1,0 +1,11 @@
+module Raysetta
+  module Background
+    class Base < EntityBase
+      def sample: (Ray r) -> Color
+
+      def export: () -> Hash[Symbol, untyped]
+      def textures: () -> Array[Texture::Base]
+      def images: () -> Array[Image]
+    end
+  end
+end

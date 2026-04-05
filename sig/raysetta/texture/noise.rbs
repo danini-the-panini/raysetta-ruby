@@ -1,0 +1,13 @@
+module Raysetta
+  module Texture
+    class Noise < Base
+      attr_accessor scale: Float
+      attr_accessor depth: Integer
+      attr_accessor marble_axis: Symbol
+
+      def initialize: (Float scale, Integer depth, Symbol marble_axis, ?Perlin noise) -> void
+
+      attr_reader noise: Perlin
+    end
+  end
+end

@@ -77,12 +77,6 @@ module Raysetta
 
     def dup = self.class.new(*e)
 
-    def floor!
-      e.map!(&:floor)
-      self
-    end
-    def floor = dup.floor!
-
     def abs!
       e.map!(&:abs)
       self

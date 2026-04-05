@@ -1,0 +1,11 @@
+module Raysetta
+  module Texture
+    class Base < EntityBase
+      def sample: (Vec2 uv, Vec3 point) -> Color
+
+      def export: () -> Hash[Symbol, untyped]
+      def images: () -> Array[Image]
+      def noises: () -> Array[Perlin]
+    end
+  end
+end

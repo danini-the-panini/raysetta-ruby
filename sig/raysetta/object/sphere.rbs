@@ -1,0 +1,14 @@
+module Raysetta
+  module Object
+    class Sphere < Base
+      attr_accessor center: Vec3
+      attr_accessor radius: Float
+      attr_accessor material: Material::Base
+      attr_reader bounding_box: AABB
+
+      def initialize: (Vec3 center, Float radius, Material::Base material) -> void
+
+      def hit: (Ray r, Range[Float] ray_t, ?Vec3 center) -> Hit?
+    end
+  end
+end

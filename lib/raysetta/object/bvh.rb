@@ -47,8 +47,10 @@ module Raysetta
         else
           objs.sort_by! { _1.bounding_box[axis].min }
           mid = objs.length / 2
-          @left = BVH.new(objs[0...mid])
-          @right = BVH.new(objs[mid..])
+          left_objs = objs[0...mid] #: Array[Object::Base]
+          right_objs = objs[mid..] #: Array[Object::Base]
+          @left = BVH.new(left_objs)
+          @right = BVH.new(right_objs)
         end
       end
 

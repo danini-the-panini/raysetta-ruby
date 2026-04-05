@@ -1,0 +1,9 @@
+module Raysetta
+  module Background
+    class SphereMap < Base
+      attr_accessor texture: Texture::Base
+
+      def initialize: (Texture::Base texture) -> void
+    end
+  end
+end

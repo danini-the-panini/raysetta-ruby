@@ -1,0 +1,9 @@
+module Raysetta
+  module Background
+    class Solid < Base
+      attr_accessor albedo: Color
+
+      def initialize: (Color albedo) -> void
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Raysetta
+  class Image < EntityBase
+    @image: ChunkyPNG::Canvas
+    attr_reader image: ChunkyPNG::Canvas
+
+    def initialize: (?path: String?, ?data_url: String?) -> void
+
+    def width: () -> Integer
+    def height: () -> Integer
+
+    def []: (Integer x, Integer y) -> Color
+  end
+end

@@ -1,0 +1,4 @@
+class OptionParser
+  def initialize: () { (untyped) -> void } -> void
+  def parse!: () -> void
+end

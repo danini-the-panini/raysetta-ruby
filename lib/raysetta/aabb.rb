@@ -17,11 +17,10 @@ module Raysetta
     # Treat the two points a and b as extrema for the bounding box, so we don't require a
     # particular minimum/maximum coordinate order.
     def self.from_points(*points)
-      new(
-        Interval.new(*points.map(&:x).minmax),
-        Interval.new(*points.map(&:y).minmax),
-        Interval.new(*points.map(&:z).minmax)
-      )
+      x = points.map(&:x).minmax #: [Float, Float]
+      y = points.map(&:y).minmax #: [Float, Float]
+      z = points.map(&:z).minmax #: [Float, Float]
+      new(Interval.new(x[0], x[1]), Interval.new(y[0], y[1]), Interval.new(z[0], z[1]))
     end
 
     def self.from_aabbs(box0, box1=nil, *rest)
@@ -34,7 +33,7 @@ module Raysetta
       case n
       when 0 then x
       when 1 then y
-      when 2 then z
+      else z
       end
     end
 

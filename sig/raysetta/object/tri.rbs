@@ -1,0 +1,15 @@
+module Raysetta
+  module Object
+    class Tri < Quad
+      # Compute the bounding box of all three vertices.
+      @bounding_box: AABB
+
+      def initialize: (Vec3 a, Vec3 b, Vec3 c, Material::Base material) -> void
+
+      private
+
+      def interior?: (Float a, Float b) -> Vec2?
+      def compute_bounding_box: () -> AABB
+    end
+  end
+end

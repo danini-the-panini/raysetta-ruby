@@ -5,7 +5,7 @@ require "test_helper"
 class TestSphere < Minitest::Test
   def sphere
     @sphere ||= Raysetta::Object::Sphere.new(
-      point3(5.0, 5.0, 5.0),
+      vec3(5.0, 5.0, 5.0),
       1.0,
       OpenStruct.new(id: "1234")
     )
@@ -17,7 +17,7 @@ class TestSphere < Minitest::Test
       0.001..1000.0
     )
     refute_nil hit
-    assert_equal point3(5.0, 4.0, 5.0), hit.point
+    assert_equal vec3(5.0, 4.0, 5.0), hit.point
     assert_equal vec3(0.0, -1.0, 0.0), hit.normal
     assert_equal 4.0, hit.t
     assert_equal sphere.material, hit.material
@@ -30,7 +30,7 @@ class TestSphere < Minitest::Test
       0.001..1000.0
     )
     refute_nil hit
-    assert_equal point3(5.0, 6.0, 5.0), hit.point
+    assert_equal vec3(5.0, 6.0, 5.0), hit.point
     assert_equal vec3(0.0, -1.0, 0.0), hit.normal
     assert_equal 1.0, hit.t
     assert_equal sphere.material, hit.material
@@ -43,7 +43,7 @@ class TestSphere < Minitest::Test
       5.0..1000.0
     )
     refute_nil hit
-    assert_equal point3(5.0, 6.0, 5.0), hit.point
+    assert_equal vec3(5.0, 6.0, 5.0), hit.point
     assert_equal vec3(0.0, -1.0, 0.0), hit.normal
     assert_equal 6.0, hit.t
     assert_equal sphere.material, hit.material

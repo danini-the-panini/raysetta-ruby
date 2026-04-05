@@ -5,7 +5,7 @@ require "test_helper"
 class TestBVH < Minitest::Test
   def sphere(x, y, z)
     Raysetta::Object::Sphere.new(
-      point3(x, y, z),
+      vec3(x, y, z),
       1.0,
       OpenStruct.new(id: "#{x}-#{y}-#{z}")
     )

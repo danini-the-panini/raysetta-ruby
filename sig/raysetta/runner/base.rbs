@@ -1,0 +1,15 @@
+module Raysetta
+  module Runner
+    type output = Array[Array[Output::Base::pixel]]
+
+    class Base
+      attr_reader tracer: Tracer
+
+      def initialize: (Tracer tracer) -> void
+
+      def call: () -> void
+      def progress: () -> void
+      def finish: () -> void
+    end
+  end
+end

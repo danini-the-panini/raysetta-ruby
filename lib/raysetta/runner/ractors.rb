@@ -13,11 +13,14 @@ module Raysetta
         finish
       end
 
-      def self.run((y, tracer))
-        row = Array.new(tracer.width) { [0, 0, 0] }
+      def self.run(args)
+        y = args[0] #: Integer
+        tracer = args[1] #: Tracer
+
+        row = Array.new(tracer.width) { [0, 0, 0] } #: Array[[Integer, Integer, Integer]]
         row.each.with_index do |pixel, x|
           r, g, b = tracer.call(x, y)
-                
+
           pixel[0] = r
           pixel[1] = g
           pixel[2] = b

@@ -16,7 +16,7 @@ class TestMetal < Minitest::Test
     r = ray([0.0, 0.0, 0.0], [0.0, 1.0, 0.0], 0.75)
 
     hit = Raysetta::Hit.new(
-      point: point3(1.0, 1.0, 0.0),
+      point: vec3(1.0, 1.0, 0.0),
       r:,
       normal: vec3(-Math.sqrt(2.0), -Math.sqrt(2.0), 0.0),
       t: 10.0,
@@ -27,7 +27,7 @@ class TestMetal < Minitest::Test
     scatter = mat.scatter(r, hit)
 
     assert_equal rgb(0.1, 0.2, 0.3), scatter.attenuation
-    assert_equal point3(1.0, 1.0, 0.0), scatter.ray.origin
+    assert_equal vec3(1.0, 1.0, 0.0), scatter.ray.origin
     assert_equal vec3(-0.8, -0.6, 0.0), scatter.ray.direction
     assert_equal 0.75, scatter.ray.time
   end

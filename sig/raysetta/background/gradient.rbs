@@ -1,0 +1,10 @@
+module Raysetta
+  module Background
+    class Gradient < Base
+      attr_accessor top: Color
+      attr_accessor bottom: Color
+
+      def initialize: (Color top, Color bottom) -> void
+    end
+  end
+end

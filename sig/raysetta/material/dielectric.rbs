@@ -1,0 +1,15 @@
+module Raysetta
+  module Material
+    class Dielectric < Base
+      # Refractive index in vacuum or air, or the ratio of the material's refractive index over
+      # the refractive index of the enclosing media
+      attr_accessor refraction_index: Float
+
+      def initialize: (Float refraction_index) -> void
+
+      private
+
+      def reflectance: (Float cosine, Float ri) -> Float
+    end
+  end
+end

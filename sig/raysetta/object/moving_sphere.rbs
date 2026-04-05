@@ -1,0 +1,15 @@
+module Raysetta
+  module Object
+    class MovingSphere < Sphere
+      @bounding_box: AABB
+
+      attr_accessor center_vec: Vec3
+
+      def initialize: (Vec3 center1, Vec3 center2, Float radius, Material::Base material) -> void
+
+      # Linearly interpolate from center1 to center2 according to time, where t=0 yields
+      # center1, and t=1 yields center2.
+      def center_at: (?Float time) -> Vec3
+    end
+  end
+end

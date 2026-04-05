@@ -1,0 +1,13 @@
+module Raysetta
+  module Object
+    class Box < Group
+      @a: Vec3
+      @b: Vec3
+      @material: Material::Base
+
+      def initialize: (Vec3 a, Vec3 b, Material::Base material) -> void
+
+      def export: () -> Hash[Symbol, untyped]
+    end
+  end
+end

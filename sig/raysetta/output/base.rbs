@@ -1,0 +1,15 @@
+module Raysetta
+  module Output
+    class Base
+      type pixel = [Integer, Integer, Integer]
+      attr_reader pixels: Array[Array[pixel]]
+      attr_reader width: Integer
+      attr_reader height: Integer
+
+      def initialize: (Array[Array[pixel]] pixels, width: Integer, height: Integer) -> void
+
+      def call: () -> untyped
+      def save: (String file) -> void
+    end
+  end
+end

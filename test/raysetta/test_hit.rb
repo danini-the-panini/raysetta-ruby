@@ -4,7 +4,7 @@ require "test_helper"
 
 class TestHit < Minitest::Test
   def test_initialize
-    point = point3(1.0, 1.0, 1.0)
+    point = vec3(1.0, 1.0, 1.0)
     r = ray([0.0, 0.0, 0.0], [0.5, 0.5, 0.5])
 
     norm1 = vec3(-0.4, -0.5, -0.6)

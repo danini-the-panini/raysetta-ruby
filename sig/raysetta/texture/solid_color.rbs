@@ -1,0 +1,10 @@
+module Raysetta
+  module Texture
+    class SolidColor < Base
+      attr_accessor albedo: Color
+
+      def initialize: (Color albedo) -> void
+      def self.rgb: (Float r, Float g, Float b) -> instance
+    end
+  end
+end

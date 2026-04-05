@@ -5,12 +5,6 @@ module Raysetta
     class Group < Base
       attr_reader :objects, :bounding_box
 
-      def self.new(*objects, bvh: false)
-        return super(*objects) unless bvh
-
-        BVH.new(objects)
-      end
-
       def initialize(*objects)
         self.objects = objects
       end
@@ -26,12 +20,13 @@ module Raysetta
       end
 
       def hit(r, ray_t)
-        hit = nil
+        hit = nil #: Hit?
         closest_so_far = ray_t.max
 
         @objects.each do |object|
           if tmp = object.hit(r, ray_t.min..closest_so_far)
             hit = tmp
+            # @type var hit: Hit
             closest_so_far = hit.t
           end
         end

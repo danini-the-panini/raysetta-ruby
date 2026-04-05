@@ -1,0 +1,9 @@
+module Raysetta
+  module Background
+    class CubeMap < Base
+      attr_accessor textures: Array[Texture::Base]
+
+      def initialize: (*Texture::Base textures) -> void
+    end
+  end
+end

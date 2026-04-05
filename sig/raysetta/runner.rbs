@@ -1,4 +1,5 @@
 module Raysetta
-  VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+  module Runner
+    def self.parse_scene: (String input_path, ?output_path: String?, ?runner: Symbol, ?format: Symbol, ?concurrency: Integer, **untyped options) -> void
+  end
 end

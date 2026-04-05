@@ -1,0 +1,21 @@
+module Raysetta
+  class Vec2 < Vec
+    def self.dimensions: () -> 2
+
+    def initialize: (?Float x, ?Float y) -> void
+
+    def x: () -> Float
+    def y: () -> Float
+
+    alias u x
+    alias v y
+
+    def x=: (Float v) -> Float
+    def y=: (Float v) -> Float
+
+    alias u= x=
+    alias v= y=
+
+    def self.sample_square: () -> instance
+  end
+end

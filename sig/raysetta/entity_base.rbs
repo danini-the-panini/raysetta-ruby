@@ -1,0 +1,12 @@
+module Raysetta
+  class EntityBase
+    def id: () -> String
+    def type: () -> String
+
+    def ==: (untyped other) -> bool
+    alias eql? ==
+    def hash: () -> Integer
+
+    def export: () -> Hash[Symbol, untyped]
+  end
+end

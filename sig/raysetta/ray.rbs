@@ -1,0 +1,18 @@
+module Raysetta
+  class Ray
+    attr_accessor origin: Vec3
+    attr_accessor direction: Vec3
+    attr_accessor time: Float
+
+    def initialize: (Vec3 origin, Vec3 direction, ?Float time) -> void
+
+    def at: (Float t) -> Vec3
+
+    def dup: () -> instance
+
+    def ==: (untyped r) -> bool
+    alias eql? ==
+
+    def hash: () -> Integer
+  end
+end

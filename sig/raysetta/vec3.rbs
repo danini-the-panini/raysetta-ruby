@@ -1,0 +1,26 @@
+module Raysetta
+  class Vec3 < Vec
+    def self.dimensions: () -> 3
+
+    def initialize: (?Float x, ?Float y, ?Float z) -> void
+
+    def x: () -> Float
+    def y: () -> Float
+    def z: () -> Float
+
+    def x=: (Float v) -> void
+    def y=: (Float v) -> void
+    def z=: (Float v) -> void
+
+    def cross: (Vec3 v) -> instance
+    def reflect: (Vec3 n) -> instance
+    def refract: (Vec3 n, Float etai_over_etat) -> instance
+
+    def to_a: () -> [Float, Float, Float]
+
+    def self.random_in_unit_sphere: () -> instance
+    def self.random_unit: () -> instance
+    def self.random_on_hemisphere: (Vec3 normal) -> instance
+    def self.random_in_unit_disk: () -> instance
+  end
+end

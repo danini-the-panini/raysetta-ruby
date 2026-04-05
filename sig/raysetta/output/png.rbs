@@ -1,0 +1,8 @@
+module Raysetta
+  module Output
+    class PNG < Base
+      def call: () -> ChunkyPNG::Image
+      def save: (String file) -> void
+    end
+  end
+end

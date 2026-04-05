@@ -132,17 +132,6 @@ class TestVec2 < Minitest::Test
     refute v.equal?(v2)
   end
 
-  def test_floor
-    v = Raysetta::Vec2.new(1.2, 2.3)
-    assert_equal Raysetta::Vec2.new(1.0, 2.0), v.floor
-  end
-
-  def test_floor_bang
-    v = Raysetta::Vec2.new(1.2, 2.3)
-    v.floor!
-    assert_equal Raysetta::Vec2.new(1.0, 2.0), v
-  end
-
   def test_smoothstep
     v = Raysetta::Vec2.new(1.0, 2.0)
     assert_equal Raysetta::Vec2.new(1.0, -4.0), v.smoothstep

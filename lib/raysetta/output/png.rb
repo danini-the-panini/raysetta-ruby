@@ -10,7 +10,7 @@ module Raysetta
 
         pixels.each.with_index do |row, y|
           row.each.with_index do |pixel, x|
-            image.set_pixel(x, y, ChunkyPNG::Color.rgb(*pixel))
+            image.set_pixel(x, y, ChunkyPNG::Color.rgb(pixel[0], pixel[1], pixel[2]))
           end
         end
 

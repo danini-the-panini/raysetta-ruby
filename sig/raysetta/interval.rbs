@@ -1,0 +1,36 @@
+module Raysetta
+  class Interval
+    @min: Float
+    @max: Float
+
+    attr_accessor min: Float
+    attr_accessor max: Float
+
+    # Default interval is empty
+    def initialize: (?Float min, ?Float max) -> void
+
+    def self.from_range: (Range[Float] r) -> Interval
+
+    # Create the interval tightly enclosing the two input intervals.
+    def self.from_intervals: (Interval a, Interval b) -> Interval
+
+    def size: () -> Float
+
+    def include?: (Float x) -> bool
+    def surround?: (Float x) -> bool
+    def clamp: (Float x) -> Float
+
+    def expand: (Float delta) -> instance
+    def expand!: (Float delta) -> self
+
+    def dup: () -> instance
+
+    def ==: (untyped i) -> bool
+    alias eql? ==
+
+    def hash: () -> Integer
+
+    EMPTY: Interval
+    UNIVERSE: Interval
+  end
+end

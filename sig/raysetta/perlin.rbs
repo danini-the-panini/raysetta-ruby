@@ -1,0 +1,19 @@
+module Raysetta
+  class Perlin < EntityBase
+    attr_accessor randvec: Array[Vec3]
+    attr_accessor perm_x: Array[Integer]
+    attr_accessor perm_y: Array[Integer]
+    attr_accessor perm_z: Array[Integer]
+
+    POINT_COUNT: 256
+
+    def initialize: (?Array[Vec3] randvec, ?Array[Integer] perm_x, ?Array[Integer] perm_y, ?Array[Integer] perm_z) -> void
+
+    def noise: (Vec3 point) -> Float
+    def turb: (Vec3 point, Integer  depth) -> Float
+
+    def self.perlin_interp: (Array[Array[Array[Vec3]]] c, Vec3 vec) -> Float
+
+    CUBE: Array[[Integer, Integer, Integer]]
+  end
+end

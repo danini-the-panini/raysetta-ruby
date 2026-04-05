@@ -1,0 +1,11 @@
+module Raysetta
+  module Runner
+    class Ractors < Concurrent
+      attr_reader output: output
+
+      def call: () -> void
+
+      def self.run: ([Integer, Tracer]) -> Array[Output::Base::pixel]
+    end
+  end
+end

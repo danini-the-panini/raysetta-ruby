@@ -63,7 +63,7 @@ module Raysetta
 
       def parse_noise(noise)
         Perlin.new(
-          noise["randvec"].map { Vec3.new(*_1) },
+          noise["randvec"].map { |v| vec3(v)) },
           noise["perm_x"],
           noise["perm_y"],
           noise["perm_z"]
@@ -76,7 +76,7 @@ module Raysetta
 
       def parse_texture(tex)
         case tex["type"]
-        when "SolidColor" then Texture::SolidColor.new(Color.new(*tex["albedo"]))
+        when "SolidColor" then Texture::SolidColor.new(color(tex["albedo"]))
         when "Checker" then Texture::Checker.new(tex["scale"], parse_texture(tex["even"]), parse_texture(tex["odd"]))
         when "Image" then Texture::Image.new(image(tex["image"]))
         when "Noise" then Texture::Noise.new(tex["scale"], tex["depth"], tex["marble_axis"]&.to_sym, noise(tex["noise"]))
@@ -110,23 +110,23 @@ module Raysetta
       end
 
       def parse_sphere(obj)
-        Object::Sphere.new(Point3.new(*obj["center"]), obj["radius"], material(obj["material"]))
+        Object::Sphere.new(vec3(obj["center"]), obj["radius"], material(obj["material"]))
       end
 
       def parse_moving_sphere(obj)
-        Object::MovingSphere.new(Point3.new(*obj["center1"]), Point3.new(*obj["center2"]), obj["radius"], material(obj["material"]))
+        Object::MovingSphere.new(vec3(obj["center1"]), vec3(obj["center2"]), obj["radius"], material(obj["material"]))
       end
 
       def parse_quad(obj)
-        Object::Quad.new(Point3.new(*obj["q"]), Vec3.new(*obj["u"]), Vec3.new(*obj["v"]), material(obj["material"]))
+        Object::Quad.new(vec3(obj["q"]), vec3(obj["u"]), vec3(obj["v"]), material(obj["material"]))
       end
 
       def parse_tri(obj)
-        Object::Tri.new(Point3.new(*obj["a"]), Vec3.new(*obj["b"]), Vec3.new(*obj["c"]), material(obj["material"]))
+        Object::Tri.new(vec3(obj["a"]), vec3(obj["b"]), vec3(obj["c"]), material(obj["material"]))
       end
 
       def parse_box(obj)
-        Object::Box.new(Point3.new(*obj["a"]), Vec3.new(*obj["b"]), material(obj["material"]))
+        Object::Box.new(vec3(obj["a"]), vec3(obj["b"]), material(obj["material"]))
       end
 
       def material(name)
@@ -156,9 +156,9 @@ module Raysetta
       def parse_camera(cam)
         args = {}
         args[:vfov] = cam["vfov"] if cam.key?("vfov")
-        args[:lookfrom] = Point3.new(*cam["lookfrom"]) if cam.key?("lookfrom")
-        args[:lookat] = Point3.new(*cam["lookat"]) if cam.key?("lookat")
-        args[:vup] = Vec3.new(*cam["vup"]) if cam.key?("vup")
+        args[:lookfrom] = vec3(cam["lookfrom"]) if cam.key?("lookfrom")
+        args[:lookat] = vec3(cam["lookat"]) if cam.key?("lookat")
+        args[:vup] = vec3(cam["vup"]) if cam.key?("vup")
         args[:defocus_angle] = cam["defocus_angle"] if cam.key?("defocus_angle")
         args[:focus_dist] = cam["focus_dist"] if cam.key?("focus_dist")
         Camera.new(**args)
@@ -175,11 +175,11 @@ module Raysetta
       end
 
       def parse_solid_bg(bg)
-        Background::Solid.new(Color.new(*bg["albedo"]))
+        Background::Solid.new(color(bg["albedo"]))
       end
 
       def parse_gradient_bg(bg)
-        Background::Gradient.new(Color.new(*bg["top"]), Color.new(*bg["bottom"]))
+        Background::Gradient.new(color(bg["top"]), color(bg["bottom"]))
       end
 
       def parse_sphere_map(bg)
@@ -188,6 +188,18 @@ module Raysetta
 
       def parse_cube_map(bg)
         Background::CubeMap.new(*bg["textures"].map { texture(_1) })
+      end
+
+      def vec3(e)
+        Vec3.new(e[0], e[1], e[2])
+      end
+
+      def vec2(e)
+        Vec2.new(e[0], e[1])
+      end
+
+      def color(e)
+        Color.new(e[0], e[1], e[2])
       end
     end
   end

@@ -9,8 +9,8 @@ module Raysetta
         @albedo = albedo
       end
 
-      def self.rgb(*e)
-        new(Color.new(*e))
+      def self.rgb(r, g, b)
+        new(Color.new(r, g, b))
       end
 
       def sample(uv, point)
