@@ -1,0 +1,26 @@
+module Raysetta
+  module Object
+    class Quad < Base
+      attr_accessor q: Vec3
+      attr_accessor u: Vec3
+      attr_accessor v: Vec3
+      attr_accessor material: Material::Base
+
+      attr_reader bounding_box: AABB
+
+      def initialize: (Vec3 q, Vec3 u, Vec3 v, Material::Base material) -> void
+
+      def to_s: (?Integer depth) -> ::String
+
+      private
+
+      attr_accessor normal: Vec3
+      attr_accessor d: Float
+      attr_accessor w: Vec3
+
+      def interior?: (Float a, Float b) -> Vec2?
+
+      def compute_bounding_box: () -> AABB
+    end
+  end
+end

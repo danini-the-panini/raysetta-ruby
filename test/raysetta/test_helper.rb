@@ -7,21 +7,14 @@ class Minitest::Test
   def vec3(x, y, z)
     Raysetta::Vec3.new(x, y, z)
   end
+  alias :rgb :vec3
 
   def vec2(x, y)
     Raysetta::Vec2.new(x, y)
   end
 
-  def point3(x, y, z)
-    Raysetta::Point3.new(x, y, z)
-  end
-
-  def rgb(r, g, b)
-    Raysetta::Color.new(r, g, b)
-  end
-
   def ray(o, d, t=0.0)
-    Raysetta::Ray.new(point3(*o), vec3(*d), t)
+    Raysetta::Ray.new(vec3(*o), vec3(*d), t)
   end
 
   def int(min, max)
@@ -29,7 +22,7 @@ class Minitest::Test
   end
 
   def aabb(min, max)
-    Raysetta::AABB.from_points(point3(*min), point3(*max))
+    Raysetta::AABB.from_points(vec3(*min), vec3(*max))
   end
 end
 

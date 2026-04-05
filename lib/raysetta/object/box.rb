@@ -3,10 +3,6 @@
 module Raysetta
   module Object
     class Box < Group
-      def self.new(*args)
-        super(*args, bvh: false)
-      end
-
       def initialize(a, b, material)
         @a = a
         @b = b
@@ -14,24 +10,22 @@ module Raysetta
 
         # Returns the 3D box (six sides) that contains the two opposite vertices a & b.
 
-        sides = []
-    
         # Construct the two opposite vertices with the minimum and maximum coordinates.
-        min = Point3.new([a.x, b.x].min, [a.y, b.y].min, [a.z, b.z].min);
-        max = Point3.new([a.x, b.x].max, [a.y, b.y].max, [a.z, b.z].max);
+        min = Vec3.new([a.x, b.x].min, [a.y, b.y].min, [a.z, b.z].min);
+        max = Vec3.new([a.x, b.x].max, [a.y, b.y].max, [a.z, b.z].max);
     
         dx = Vec3.new(max.x - min.x, 0.0, 0.0)
         dy = Vec3.new(0.0, max.y - min.y, 0.0)
         dz = Vec3.new(0.0, 0.0, max.z - min.z)
     
-        sides << (Quad.new(Point3.new(min.x, min.y, max.z),  dx,  dy, material)) # front
-        sides << (Quad.new(Point3.new(max.x, min.y, max.z), -dz,  dy, material)) # right
-        sides << (Quad.new(Point3.new(max.x, min.y, min.z), -dx,  dy, material)) # back
-        sides << (Quad.new(Point3.new(min.x, min.y, min.z),  dz,  dy, material)) # left
-        sides << (Quad.new(Point3.new(min.x, max.y, max.z),  dx, -dz, material)) # top
-        sides << (Quad.new(Point3.new(min.x, min.y, min.z),  dx,  dz, material)) # bottom
-
-        super(*sides)
+        super(
+          Quad.new(Vec3.new(min.x, min.y, max.z),  dx,  dy, material), # front
+          Quad.new(Vec3.new(max.x, min.y, max.z), -dz,  dy, material), # right
+          Quad.new(Vec3.new(max.x, min.y, min.z), -dx,  dy, material), # back
+          Quad.new(Vec3.new(min.x, min.y, min.z),  dz,  dy, material), # left
+          Quad.new(Vec3.new(min.x, max.y, max.z),  dx, -dz, material), # top
+          Quad.new(Vec3.new(min.x, min.y, min.z),  dx,  dz, material)  # bottom
+        )
       end
 
       def export

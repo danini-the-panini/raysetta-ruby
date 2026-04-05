@@ -2,19 +2,21 @@
 
 module Raysetta
   module Util
+    EPSILON = 1e-8
+
     def self.degrees_to_radians(degrees) = degrees * Math::PI / 180.0
 
     # Returns a random real in [min,max).
     def self.random(min, max) = min + (max-min)*rand
 
     def self.linear_to_gamma(linear_component)
-      return 0 unless linear_component > 0
+      return 0.0 unless linear_component > 0.0
 
       Math.sqrt(linear_component)
     end
 
     def self.gamma_to_linear(gamma_component, gamma = 2.2)
-      return 0 unless gamma_component > 0
+      return 0.0 unless gamma_component > 0.0
 
       gamma_component ** gamma
     end

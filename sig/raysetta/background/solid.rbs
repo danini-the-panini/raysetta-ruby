@@ -1,0 +1,9 @@
+module Raysetta
+  module Background
+    class Solid < Base
+      attr_accessor albedo: Vec3
+
+      def initialize: (Vec3 albedo) -> void
+    end
+  end
+end

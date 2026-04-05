@@ -19,13 +19,13 @@ class TestUtil < Minitest::Test
   def test_linear_to_gamma
     assert_equal 0.0, Raysetta::Util.linear_to_gamma(0.0)
     assert_equal 0.0, Raysetta::Util.linear_to_gamma(-1.0)
-    assert_in_delta 0.5, Raysetta::Util.linear_to_gamma(0.25), Raysetta::Vec3::EPSILON
+    assert_in_delta 0.5, Raysetta::Util.linear_to_gamma(0.25), Raysetta::Util::EPSILON
   end
 
   def test_gamma_to_linear
     assert_equal 0.0, Raysetta::Util.gamma_to_linear(0.0)
     assert_equal 0.0, Raysetta::Util.gamma_to_linear(-1.0)
-    assert_in_delta 0.217637640824031, Raysetta::Util.gamma_to_linear(0.5), Raysetta::Vec3::EPSILON
-    assert_in_delta 0.25, Raysetta::Util.gamma_to_linear(0.5, 2.0), Raysetta::Vec3::EPSILON
+    assert_in_delta 0.217637640824031, Raysetta::Util.gamma_to_linear(0.5), Raysetta::Util::EPSILON
+    assert_in_delta 0.25, Raysetta::Util.gamma_to_linear(0.5, 2.0), Raysetta::Util::EPSILON
   end
 end

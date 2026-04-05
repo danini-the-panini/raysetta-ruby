@@ -6,11 +6,8 @@ end
 
 require_relative "raysetta/version"
 require_relative "raysetta/util"
-require_relative "raysetta/vec"
 require_relative "raysetta/vec2"
 require_relative "raysetta/vec3"
-require_relative "raysetta/point3"
-require_relative "raysetta/color"
 require_relative "raysetta/ray"
 require_relative "raysetta/interval"
 require_relative "raysetta/aabb"

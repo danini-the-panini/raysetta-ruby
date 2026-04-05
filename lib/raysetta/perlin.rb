@@ -4,6 +4,8 @@ module Raysetta
   class Perlin < EntityBase
     POINT_COUNT = 256
 
+    attr_accessor :randvec, :perm_x, :perm_y, :perm_z
+
     def initialize(
       randvec = Array.new(POINT_COUNT) { Vec3.random(-1.0, 1.0).normalize },
       perm_x = (0...POINT_COUNT).to_a.shuffle!,
@@ -17,13 +19,15 @@ module Raysetta
     end
 
     def noise(point)
-      ivec = point.floor
-      vec = point - ivec
+      ivec = point.to_a.map(&:floor) #: [Integer, Integer, Integer]
+      i = ivec[0]
+      j = ivec[1]
+      k = ivec[2]
+      vec = point - Vec3.new(i.to_f, j.to_f, k.to_f)
 
-      i, j, k = ivec
       c = Array.new(2) { Array.new(2) { Array.new(2) } }
 
-      Perlin.each_cube do |di, dj, dk|
+      CUBE.each do |di, dj, dk|
         c[di][dj][dk] = @randvec[
           @perm_x[(i + di) & 255] ^
           @perm_y[(j + dj) & 255] ^
@@ -64,17 +68,17 @@ module Raysetta
     def export
       {
         **super,
-        randvec: @randvec.map(&:to_a),
-        perm_x: @perm_x,
-        perm_y: @perm_y,
-        perm_z: @perm_z,
+        randvec: randvec.map(&:to_a),
+        perm_x: perm_x,
+        perm_y: perm_y,
+        perm_z: perm_z,
       }
     end
 
     def self.perlin_interp(c, vec)
       v = vec.smoothstep
-      each_cube.sum do |i, j, k|
-        weight = vec - Vec3.new(i, j, k)
+      CUBE.sum do |i, j, k|
+        weight = vec - Vec3.new(i.to_f, j.to_f, k.to_f)
         (i * v.x + (1 - i) * (1 - v.x)) *
         (j * v.y + (1 - j) * (1 - v.y)) *
         (k * v.z + (1 - k) * (1 - v.z)) *
@@ -82,8 +86,6 @@ module Raysetta
       end
     end
 
-    def self.each_cube(&block)
-      [0, 1].product([0, 1], [0, 1]).each(&block)
-    end
+    CUBE = [0, 1].product([0, 1],[0, 1])
   end
 end

@@ -1,0 +1,21 @@
+module Raysetta
+  class Hit
+    attr_accessor point: Vec3
+    attr_accessor normal: Vec3
+    attr_accessor t: Float
+    attr_accessor material: Material::Base
+    attr_accessor uv: Vec2
+
+    attr_writer front_face: bool
+
+    def initialize: (t: Float, normal: Vec3, material: Material::Base, r: Ray, point: Vec3, ?uv: Vec2) -> void
+
+    def front_face?: () -> bool
+
+    private
+
+    # Sets the hit's normal vector.
+    # NOTE: `@normal` is assumed to have unit length.
+    def set_face_normal: (Ray r) -> void
+  end
+end

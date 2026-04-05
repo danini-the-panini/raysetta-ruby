@@ -1,0 +1,6 @@
+module Raysetta
+  VERSION: String
+
+  class Error < StandardError
+  end
+end

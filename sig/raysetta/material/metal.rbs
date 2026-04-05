@@ -1,0 +1,11 @@
+module Raysetta
+  module Material
+    class Metal < Base
+      attr_accessor texture: Texture::Base
+      attr_accessor fuzz: Float
+
+      def initialize: (Texture::Base texture, Float fuzz) -> void
+      def self.solid: (Vec3 albedo, Float fuzz) -> instance
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Raysetta
+  module Object
+    class Base < EntityBase
+      def hit: (Ray r, Range[Float] ray_t) -> Hit?
+
+      def bounding_box: () -> AABB
+
+      def export: () -> Hash[Symbol, untyped]
+      def materials: () -> Array[Material::Base]
+      def objects: () -> Array[Object::Base]
+
+      def to_s: (?Integer depth) -> String
+    end
+  end
+end

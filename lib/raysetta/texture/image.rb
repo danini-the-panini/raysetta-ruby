@@ -23,15 +23,15 @@ module Raysetta
         x2 = x.ceil
         y2 = y.ceil
 
-        x2 = x1+1.0 if x2 == x1
-        y2 = y1+1.0 if y2 == y1
+        x2 = x1+1 if x2 == x1
+        y2 = y1+1 if y2 == y1
         
         q11 = image[x1.to_i, y1.to_i]
         q12 = image[x1.to_i, y2.to_i]
         q21 = image[x2.to_i, y1.to_i]
         q22 = image[x2.to_i, y2.to_i]
 
-        (q11*(x2-x)*(y2-y)+q21*(x-x1)*(y2-y)+q12*(x2-x)*(y-y1)+q22*(x-x1)*(y-y1)) / ((x2-x1)*(y2-y1))
+        (q11*(x2-x)*(y2-y)+q21*(x-x1)*(y2-y)+q12*(x2-x)*(y-y1)+q22*(x-x1)*(y-y1)) / ((x2-x1)*(y2-y1)).to_f
       end
 
       def ==(tex)

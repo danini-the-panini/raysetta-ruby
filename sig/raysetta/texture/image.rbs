@@ -1,0 +1,11 @@
+module Raysetta
+  module Texture
+    class Image < Base
+      attr_accessor image: Raysetta::Image
+
+      def initialize: (Raysetta::Image image) -> void
+
+      def images: () -> [Raysetta::Image]
+    end
+  end
+end

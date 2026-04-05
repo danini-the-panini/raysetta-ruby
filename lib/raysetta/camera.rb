@@ -13,8 +13,8 @@ module Raysetta
 
     def initialize(
       vfov: 90.0,
-      lookfrom: Point3.new(0.0, 0.0, 0.0),
-      lookat: Point3.new(0.0, 0.0, -1.0),
+      lookfrom: Vec3.new(0.0, 0.0, 0.0),
+      lookat: Vec3.new(0.0, 0.0, -1.0),
       vup: Vec3.new(0.0, 1.0, 0.0),
       defocus_angle: 0.0,
       focus_dist: 10.0

@@ -5,7 +5,7 @@ require "test_helper"
 class TestAABB < Minitest::Test
   def test_from_points
     assert_equal Raysetta::AABB.new(int(-4.0, 1.0), int(-2.0, 5.0), int(-6.0, 3.0)),
-    Raysetta::AABB.from_points(point3(1.0, -2.0, 3.0), point3(-4.0, 5.0, -6.0))
+    Raysetta::AABB.from_points(vec3(1.0, -2.0, 3.0), vec3(-4.0, 5.0, -6.0))
   end
 
   def test_from_aabbs
@@ -34,9 +34,9 @@ class TestAABB < Minitest::Test
   def test_hit
     box = Raysetta::AABB.new(int(1.0, 2.0), int(3.0, 4.0), int(5.0, 6.0))
 
-    assert box.hit(Raysetta::Ray.new(point3(0.0, 0.0, 0.0), Raysetta::Vec3.new(1.5, 3.5, 5.5)), int(0.001, 1000.0))
-    refute box.hit(Raysetta::Ray.new(point3(0.0, 0.0, 0.0), Raysetta::Vec3.new(1.5, 3.5, 5.5)), int(20.0, 1000.0))
-    refute box.hit(Raysetta::Ray.new(point3(0.0, 0.0, 0.0), Raysetta::Vec3.new(1.0, -1.0, 1.0)), int(0.001, 1000.0))
+    assert box.hit(Raysetta::Ray.new(vec3(0.0, 0.0, 0.0), Raysetta::Vec3.new(1.5, 3.5, 5.5)), int(0.001, 1000.0))
+    refute box.hit(Raysetta::Ray.new(vec3(0.0, 0.0, 0.0), Raysetta::Vec3.new(1.5, 3.5, 5.5)), int(20.0, 1000.0))
+    refute box.hit(Raysetta::Ray.new(vec3(0.0, 0.0, 0.0), Raysetta::Vec3.new(1.0, -1.0, 1.0)), int(0.001, 1000.0))
   end
 
   def test_longest_axis

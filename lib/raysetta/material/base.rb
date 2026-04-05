@@ -4,7 +4,7 @@ module Raysetta
   module Material
     class Base < EntityBase
       def emitted(uv, point)
-        return Color.new(0.0, 0.0, 0.0)
+        return Vec3.new
       end
 
       def scatter(r_in, rec)

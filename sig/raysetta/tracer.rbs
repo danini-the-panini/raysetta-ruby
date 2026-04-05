@@ -1,0 +1,16 @@
+module Raysetta
+  class Tracer
+    @pixel_sample_scale: Float
+
+    attr_reader scene: Scene
+    attr_reader width: Integer
+    attr_reader height: Integer
+    attr_reader samples_per_pixel: Integer
+    attr_reader max_depth: Integer
+
+    def initialize: (Scene scene, ?width: Integer, ?height: Integer, ?samples_per_pixel: Integer, ?max_depth: Integer) -> void
+
+    def call: (Integer x, Integer y) -> [Integer, Integer, Integer]
+    def ray_color: (Ray r, ?Integer depth) -> Vec3
+  end
+end

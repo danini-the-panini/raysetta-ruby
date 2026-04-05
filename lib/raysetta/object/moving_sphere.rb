@@ -20,8 +20,8 @@ module Raysetta
         center + center_vec * time
       end
 
-      def hit(r, ray_t)
-        super(r, ray_t, center_at(r.time))
+      def hit(r, ray_t, center = center_at(r.time))
+        super(r, ray_t, center)
       end
 
       def export

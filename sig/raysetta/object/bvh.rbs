@@ -1,0 +1,23 @@
+module Raysetta
+  module Object
+    class BVH < Base
+      @left: Object::Base
+      @right: Object::Base
+
+      attr_reader bounding_box: AABB
+
+      def initialize: (Array[Object::Base] objects) -> void
+
+      def export: () -> Hash[String, Hash[Symbol, untyped]]
+      def materials: () -> Array[Material::Base]
+      def objects: () -> Array[Object::Base]
+
+      def objects=: (Array[Object::Base] objs) -> void
+      def add: (Object::Base object) -> void
+
+      private
+
+      def export_bvh: (Object::Base obj) -> Hash[String, Hash[Symbol, untyped]]
+    end
+  end
+end

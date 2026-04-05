@@ -1,0 +1,41 @@
+module Raysetta
+  class Camera
+    attr_reader vfov: Float
+    attr_reader lookfrom: Vec3
+    attr_reader lookat: Vec3
+    attr_reader vup: Vec3
+    attr_reader defocus_angle: Float
+    attr_reader focus_dist: Float
+
+    def initialize: (?vfov: Float, ?lookfrom: Vec3, ?lookat: Vec3, ?vup: Vec3, ?defocus_angle: Float, ?focus_dist: Float) -> void
+
+    def viewport: (Integer image_width, Integer image_height) -> void
+
+    # Construct a camera ray originating from the defocus disk and directed at a randomly
+    # sampled point around the pixel location x, y.
+    def ray: (Integer x, Integer y) -> Ray
+
+    def export: () -> Hash[Symbol, untyped]
+
+    private
+
+    attr_reader image_height: Integer
+    attr_reader center: Vec3
+
+    # Calculate the horizontal and vertical delta vectors from pixel to pixel.
+    attr_reader pixel00_loc: Vec3
+    attr_reader pixel_delta_u: Vec3
+    attr_reader pixel_delta_v: Vec3
+
+    # Calculate the u,v,w unit basis vectors for the camera coordinate frame.
+    attr_reader u: Vec3
+    attr_reader v: Vec3
+    attr_reader w: Vec3
+
+    attr_reader defocus_disk_u: Vec3
+    attr_reader defocus_disk_v: Vec3
+
+    # Returns a random point in the camera defocus disk.
+    def defocus_disk_sample: () -> Vec3
+  end
+end

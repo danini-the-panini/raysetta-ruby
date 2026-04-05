@@ -1,0 +1,7 @@
+module Raysetta
+  module Output
+    class PPM < Base
+      def call: () -> String
+    end
+  end
+end

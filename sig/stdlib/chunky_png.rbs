@@ -1,0 +1,24 @@
+module ChunkyPNG
+  class Canvas
+    def width: () -> Integer
+    def height: () -> Integer
+    def get_pixel: (Integer, Integer) -> Color
+    def set_pixel: (Integer, Integer, Integer) -> void
+    def to_data_url: () -> String
+    def save: (String, Symbol) -> void
+  end
+
+  class Image < Canvas
+    def initialize: (Integer width, Integer height) -> void
+
+    def self.from_file: (String) -> instance
+    def self.from_data_url: (String) -> instance
+  end
+
+  class Color
+    def self.r: (instance) -> Integer
+    def self.g: (instance) -> Integer
+    def self.b: (instance) -> Integer
+    def self.rgb: (Integer, Integer, Integer) -> Integer
+  end
+end

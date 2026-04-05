@@ -1,0 +1,10 @@
+module Raysetta
+  module Runner
+    class Concurrent < Base
+      attr_reader count: Integer
+      attr_reader output: output
+
+      def initialize: (Tracer tracer, ?count: Integer) -> void
+    end
+  end
+end

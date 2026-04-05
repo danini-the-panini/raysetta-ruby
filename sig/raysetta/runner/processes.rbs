@@ -1,0 +1,9 @@
+module Raysetta
+  module Runner
+    class Processes < Concurrent
+      attr_reader output: output
+
+      def call: () -> void
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Raysetta
+  module Texture
+    class Checker < Base
+      attr_accessor inv_scale: Float
+      attr_accessor even: Texture::Base
+      attr_accessor odd: Texture::Base
+
+      def initialize: (Float scale, Texture::Base even, Texture::Base odd) -> void
+      def self.solid: (Float scale, Vec3 even, Vec3 odd) -> instance
+
+      def scale=: (Float scale) -> Float
+      def scale: () -> Float
+    end
+  end
+end

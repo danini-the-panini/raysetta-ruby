@@ -1,0 +1,11 @@
+module Raysetta
+  module Runner
+    class Sync < Base
+      attr_reader output: output
+
+      def initialize: (Tracer tracer) -> void
+
+      def call: () -> void
+    end
+  end
+end

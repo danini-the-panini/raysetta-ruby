@@ -1,0 +1,48 @@
+module Raysetta
+  class Vec2
+    attr_accessor x: Float
+    attr_accessor y: Float
+
+    attr_accessor u (): Float
+    attr_accessor v (): Float
+
+    def initialize: (?Float x, ?Float y) -> void
+
+    def self.random: (?Float min, ?Float max) -> Vec2
+    def self.sample_square: () -> instance
+
+    def []: (Integer i) -> Float
+    def []=: (Integer i, Float v) -> void
+
+    def -@: () -> Vec2
+
+    def +: (Vec2 v) -> Vec2
+    def -: (Vec2 v) -> Vec2
+    def *: (Float t) -> Vec2
+    def /: (Float t) -> Vec2
+
+    def add: (Vec2 v) -> self
+    def sub: (Vec2 v) -> self
+    def mul: (Float t) -> self
+    def div: (Float t) -> self
+
+    def neg: () -> self
+
+    def length: () -> Float
+    def length_squared: () -> Float
+
+    def dot: (Vec2 v) -> Float
+    def unit: () -> Vec2
+    def normalize: () -> self
+
+    def dup: () -> Vec2
+
+    def abs!: () -> self
+    def abs: () -> Vec2
+
+    def zero?: () -> bool
+
+    def to_a: () -> [Float, Float]
+    alias to_ary to_a
+  end
+end

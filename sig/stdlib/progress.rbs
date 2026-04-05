@@ -1,0 +1,5 @@
+module Progress
+  def self.start: (String, Integer) -> void
+  def self.step: () -> void
+  def self.stop: () -> void
+end

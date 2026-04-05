@@ -5,7 +5,7 @@ format_opt = :ppm
 runner_opt = :sync
 concurrency_opt = nil
 output_path = nil
-options = {}
+options = {} #: Hash[Symbol, untyped]
 opts_parser = OptionParser.new do |opts|
   opts.banner = "Usage: raysetta FILE [options]"
 

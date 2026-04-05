@@ -1,0 +1,69 @@
+module Raysetta
+  class Scene
+    type json = Hash[String, Hash[String, Hash[String, untyped]]]
+
+    attr_accessor world: Object::Base
+    attr_accessor camera: Camera
+    attr_accessor background: Background::Base
+
+    def initialize: (Object::Base world, Camera camera, Background::Base background) -> void
+
+    def self.parse: (json json) -> Scene
+
+    def export: () -> Hash[Symbol, untyped]
+
+    private
+
+    interface _Exportable
+      def id: () -> String
+      def export: () -> Hash[Symbol, untyped]
+    end
+
+    def export_by_id: (Array[_Exportable] entities) -> Hash[String, Hash[Symbol, untyped]]
+
+    class Parser
+      @noises: Hash[String, Perlin]
+      @images: Hash[String, Image]
+      @textures: Hash[String, Texture::Base]
+      @materials: Hash[String, Material::Base]
+
+      class Error < Raysetta::Error
+      end
+
+      attr_reader json: json
+
+      def initialize: (json json) -> void
+
+      def parse: () -> Scene
+
+      def parse_noise: (Hash[String, untyped] noise) -> Perlin
+      def parse_image: (Hash[String, untyped] img) -> Image
+      def parse_texture: (Hash[String, untyped] tex) -> Texture::Base
+      def parse_material: (Hash[String, untyped] mat) -> Material::Base
+      def parse_world: (Hash[String, Hash[String, untyped]] json) -> Object::Base
+
+      def parse_object: (Hash[String, untyped] obj) -> Object::Base
+      def parse_sphere: (Hash[String, untyped] obj) -> Object::Sphere
+      def parse_moving_sphere: (Hash[String, untyped] obj) -> Object::MovingSphere
+      def parse_quad: (Hash[String, untyped] obj) -> Object::Quad
+      def parse_tri: (Hash[String, untyped] obj) -> Object::Tri
+      def parse_box: (Hash[String, untyped] obj) -> Object::Box
+
+      def material: (String name) -> Material::Base
+      def texture: (String name) -> Texture::Base
+      def image: (String name) -> Image
+      def noise: (String name) -> Perlin
+
+      def parse_camera: (Hash[String, untyped] cam) -> Camera
+      def parse_background: (Hash[String, untyped] bg) -> Background::Base
+      def parse_solid_bg: (Hash[String, untyped] bg) -> Background::Solid
+      def parse_gradient_bg: (Hash[String, untyped] bg) -> Background::Gradient
+      def parse_sphere_map: (Hash[String, untyped] bg) -> Background::SphereMap
+      def parse_cube_map: (Hash[String, untyped] bg) -> Background::CubeMap
+
+      def vec2: (Array[Float]) -> Vec2
+      def vec3: (Array[Float]) -> Vec3
+      alias rgb vec3
+    end
+  end
+end

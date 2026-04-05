@@ -1,0 +1,10 @@
+module Raysetta
+  module Material
+    class Lambertian < Base
+      attr_accessor texture: Texture::Base
+
+      def initialize: (Texture::Base texture) -> void
+      def self.solid: (Vec3 albedo) -> instance
+    end
+  end
+end

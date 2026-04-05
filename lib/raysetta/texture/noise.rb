@@ -14,9 +14,9 @@ module Raysetta
 
       def sample(uv, point)
         if marble_axis
-          Color.repeat(0.5) * (1.0 + Math.sin(scale * point.send(marble_axis) + 10.0 * @noise.turb(point, depth)))
+          Vec3.new(0.5) * (1.0 + Math.sin(scale * point.send(marble_axis) + 10.0 * @noise.turb(point, depth)))
         else
-          Color.repeat(1.0) * @noise.turb(point, depth)
+          Vec3.new(1.0) * @noise.turb(point, depth)
         end
       end
 

@@ -1,0 +1,39 @@
+module Raysetta
+  class AABB
+    attr_accessor x: Interval
+    attr_accessor y: Interval
+    attr_accessor z: Interval
+
+    # The default AABB is empty, since intervals are empty by default.
+    def initialize: (?Interval x, ?Interval y, ?Interval z) -> void
+
+    # Treat the two points a and b as extrema for the bounding box, so we don't require a
+    # particular minimum/maximum coordinate order.
+    def self.from_points: (*Vec3 points) -> AABB
+    def self.from_aabbs: (AABB box0, ?AABB? box1, *AABB rest) -> AABB
+
+    def []: (Integer n) -> Interval
+    def []=: (Integer n, Interval v) -> void
+    def +: (AABB other) -> AABB
+
+    def hit: (Ray r, Range[Float] ray_t) -> bool
+
+    # Returns the index of the longest axis of the bounding box.
+    def longest_axis: () -> (0 | 1 | 2)
+
+    def dup: () -> AABB
+
+    def ==: (untyped box) -> bool
+    alias eql? ==
+
+    def hash: () -> Integer
+
+    private
+
+    # Adjust the AABB so that no side is narrower than some delta, padding if necessary.
+    def pad_to_minimums: () -> void
+
+    EMPTY: AABB
+    UNIVERSE: AABB
+  end
+end

@@ -18,7 +18,7 @@ module Raysetta
         reflected = r_in.direction.reflect(rec.normal)
         reflected = reflected.normalize.add(Vec3.random_unit.mul(fuzz))
         scattered = Ray.new(rec.point, reflected, r_in.time)
-        return nil if scattered.direction.dot(rec.normal) <= 0
+        return nil if scattered.direction.dot(rec.normal) <= 0.0
 
         Scatter.new(scattered, texture.sample(rec.uv, rec.point))
       end

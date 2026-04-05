@@ -23,8 +23,8 @@ class TestCheckerTexture < Minitest::Test
       Raysetta::Texture::SolidColor.new(rgb(0.4, 0.5, 0.6))
     )
 
-    assert_equal(rgb(0.1, 0.2, 0.3), tex.sample(nil, point3(0.5, 0.5, 0.5)))
-    assert_equal(rgb(0.4, 0.5, 0.6), tex.sample(nil, point3(1.5, 1.5, 1.5)))
+    assert_equal(rgb(0.1, 0.2, 0.3), tex.sample(nil, vec3(0.5, 0.5, 0.5)))
+    assert_equal(rgb(0.4, 0.5, 0.6), tex.sample(nil, vec3(1.5, 1.5, 1.5)))
   end
 
   def test_export

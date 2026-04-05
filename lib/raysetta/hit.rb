@@ -9,8 +9,8 @@ module Raysetta
       t:,
       normal:,
       material:,
-      r: nil,
-      point: ray.at(t),
+      r:,
+      point:,
       uv: Vec2.new
     )
       @point = point

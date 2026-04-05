@@ -41,6 +41,7 @@ module Raysetta
       padding = delta / 2.0
       self.min -= padding
       self.max += padding
+      self
     end
 
     def dup

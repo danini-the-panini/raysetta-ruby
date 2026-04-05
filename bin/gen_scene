@@ -6,27 +6,27 @@ require "raysetta/runner"
 
 world = Raysetta::Object::Group.new
 
-checker = Raysetta::Texture::Checker.solid(0.32, Raysetta::Color.new(0.2, 0.3, 0.1), Raysetta::Color.new(0.9, 0.9, 0.9))
+checker = Raysetta::Texture::Checker.solid(0.32, Raysetta::Vec3.new(0.2, 0.3, 0.1), Raysetta::Vec3.new(0.9, 0.9, 0.9))
 ground_material = Raysetta::Material::Lambertian.new(checker)
-world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(0.0, -1000.0, 0.0), 1000.0, ground_material)
+world << Raysetta::Object::Sphere.new(Raysetta::Vec3.new(0.0, -1000.0, 0.0), 1000.0, ground_material)
 
 glass = Raysetta::Material::Dielectric.new(1.5)
 
 (-11...11).each do |a|
   (-11...11).each do |b|
     choose_mat = rand
-    center = Raysetta::Point3.new(a + 0.9*rand, 0.2, b + 0.9*rand)
+    center = Raysetta::Vec3.new(a + 0.9*rand, 0.2, b + 0.9*rand)
 
-    if (center - Raysetta::Point3.new(4.0, 0.2, 0.0)).length > 0.9
+    if (center - Raysetta::Vec3.new(4.0, 0.2, 0.0)).length > 0.9
       if choose_mat > 0.8
         # diffuse
-        albedo = Raysetta::Color.random.multiply(Raysetta::Color.random)
+        albedo = Raysetta::Vec3.random.multiply(Raysetta::Vec3.random)
         material = Raysetta::Material::Lambertian.solid(albedo)
         center2 = center + Raysetta::Vec3.new(0.0, Raysetta::Util.random(0.0, 0.5), 0.0)
         world << Raysetta::Object::MovingSphere.new(center, center2, 0.2, material)
       elsif choose_mat < 0.95
         # metal
-        albedo = Raysetta::Color.random(0.5, 1.0)
+        albedo = Raysetta::Vec3.random(0.5, 1.0)
         fuzz = Raysetta::Util.random(0.0, 0.5)
         material = Raysetta::Material::Metal.solid(albedo, fuzz)
         world << Raysetta::Object::Sphere.new(center, 0.2, material)
@@ -40,18 +40,18 @@ glass = Raysetta::Material::Dielectric.new(1.5)
 end
 
 material1 = glass
-world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(0.0, 1.0, 0.0), 1.0, material1)
+world << Raysetta::Object::Sphere.new(Raysetta::Vec3.new(0.0, 1.0, 0.0), 1.0, material1)
 
-material2 = Raysetta::Material::Lambertian.solid(Raysetta::Color.new(0.4, 0.2, 0.1))
-world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(-4.0, 1.0, 0.0), 1.0, material2)
+material2 = Raysetta::Material::Lambertian.solid(Raysetta::Vec3.new(0.4, 0.2, 0.1))
+world << Raysetta::Object::Sphere.new(Raysetta::Vec3.new(-4.0, 1.0, 0.0), 1.0, material2)
 
-material3 = Raysetta::Material::Metal.solid(Raysetta::Color.new(0.7, 0.6, 0.5), 0.0)
-world << Raysetta::Object::Sphere.new(Raysetta::Point3.new(4.0, 1.0, 0.0), 1.0, material3)
+material3 = Raysetta::Material::Metal.solid(Raysetta::Vec3.new(0.7, 0.6, 0.5), 0.0)
+world << Raysetta::Object::Sphere.new(Raysetta::Vec3.new(4.0, 1.0, 0.0), 1.0, material3)
 
 camera = Raysetta::Camera.new(
   vfov: 20,
-  lookfrom: Raysetta::Point3.new(13.0, 2.0, 3.0),
-  lookat: Raysetta::Point3.new(0.0, 0.0, 0.0),
+  lookfrom: Raysetta::Vec3.new(13.0, 2.0, 3.0),
+  lookat: Raysetta::Vec3.new(0.0, 0.0, 0.0),
   vup: Raysetta::Vec3.new(0.0, 1.0, 0.0),
   defocus_angle: 0.6,
   focus_dist: 10.0

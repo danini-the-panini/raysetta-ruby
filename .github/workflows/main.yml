@@ -8,13 +8,27 @@ on:
   pull_request:
 
 jobs:
+  steep:
+    runs-on: ubuntu-latest
+    name: Steep
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.4.0
+        bundler-cache: true
+    - name: Steep check
+      run: bundle exec steep check
+    
   build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
         ruby:
-          - '3.3.0'
+          - '3.4.0'
 
     steps:
     - uses: actions/checkout@v4
