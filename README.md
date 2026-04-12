@@ -16,8 +16,16 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ### CLI
 
+If you've installed the gem you can use the `raysetta` executable:
+
 ```
 $ raysetta scene.json --width 800 --height 600 --samples 50 --depth 100 --format ppm -o output.ppm
+```
+
+Otherwise you can just clone the repo and run via `bin/exe`:
+
+```
+$ bin/exe scene.json --width 800 --height 600 --samples 50 --depth 100 --format ppm -o output.ppm
 ```
 
 ### Gem
