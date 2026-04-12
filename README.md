@@ -1,6 +1,6 @@
 # Raysetta Ruby
 
-A raytracer written in Ruby. Part of the Raysetta project. Based on [Ray Tracing in One Weekend](https://raytracing.github.io/).
+A raytracer written in Ruby. Part of the [Raysetta project](https://github.com/danini-the-panini/raysetta). Based on [Ray Tracing in One Weekend](https://raytracing.github.io/).
 
 ## Installation
 
